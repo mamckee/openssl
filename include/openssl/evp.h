@@ -64,38 +64,8 @@
 # define EVP_PKEY_X448 NID_X448
 # define EVP_PKEY_ED448 NID_ED448
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_START
-# define EVP_PKEY_DILITHIUM2 NID_dilithium2
-# define EVP_PKEY_P256_DILITHIUM2 NID_p256_dilithium2
-# define EVP_PKEY_RSA3072_DILITHIUM2 NID_rsa3072_dilithium2
-# define EVP_PKEY_DILITHIUM3 NID_dilithium3
-# define EVP_PKEY_P384_DILITHIUM3 NID_p384_dilithium3
-# define EVP_PKEY_DILITHIUM5 NID_dilithium5
-# define EVP_PKEY_P521_DILITHIUM5 NID_p521_dilithium5
-# define EVP_PKEY_DILITHIUM2_AES NID_dilithium2_aes
-# define EVP_PKEY_P256_DILITHIUM2_AES NID_p256_dilithium2_aes
-# define EVP_PKEY_RSA3072_DILITHIUM2_AES NID_rsa3072_dilithium2_aes
-# define EVP_PKEY_DILITHIUM3_AES NID_dilithium3_aes
-# define EVP_PKEY_P384_DILITHIUM3_AES NID_p384_dilithium3_aes
-# define EVP_PKEY_DILITHIUM5_AES NID_dilithium5_aes
-# define EVP_PKEY_P521_DILITHIUM5_AES NID_p521_dilithium5_aes
-# define EVP_PKEY_FALCON512 NID_falcon512
-# define EVP_PKEY_P256_FALCON512 NID_p256_falcon512
-# define EVP_PKEY_RSA3072_FALCON512 NID_rsa3072_falcon512
-# define EVP_PKEY_FALCON1024 NID_falcon1024
-# define EVP_PKEY_P521_FALCON1024 NID_p521_falcon1024
-# define EVP_PKEY_SPHINCSHARAKA128FROBUST NID_sphincsharaka128frobust
-# define EVP_PKEY_P256_SPHINCSHARAKA128FROBUST NID_p256_sphincsharaka128frobust
-# define EVP_PKEY_RSA3072_SPHINCSHARAKA128FROBUST NID_rsa3072_sphincsharaka128frobust
-# define EVP_PKEY_SPHINCSSHA256128FROBUST NID_sphincssha256128frobust
-# define EVP_PKEY_P256_SPHINCSSHA256128FROBUST NID_p256_sphincssha256128frobust
-# define EVP_PKEY_RSA3072_SPHINCSSHA256128FROBUST NID_rsa3072_sphincssha256128frobust
-# define EVP_PKEY_SPHINCSSHAKE256128FROBUST NID_sphincsshake256128frobust
-# define EVP_PKEY_P256_SPHINCSSHAKE256128FROBUST NID_p256_sphincsshake256128frobust
-# define EVP_PKEY_RSA3072_SPHINCSSHAKE256128FROBUST NID_rsa3072_sphincsshake256128frobust
-#define OQS_OPENSSL_SIG_algs_length 28
-#define OQS_OPENSSL_KEM_algs_length 17
-#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= 0x01FF) && (a <= NID_p521_hqc256))
-#define IS_OQS_OPENSSL_SIG_NID(a) ((a >= NID_dilithium2) && (a <= NID_rsa3072_sphincsshake256128frobust))
+#define OQS_OPENSSL_KEM_algs_length 6
+#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= 0x01FF) && (a <= NID_p521_kyber90s1024))
 /////// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_END
 const char *OQSKEM_options(void);
 const char *OQSSIG_options(void);

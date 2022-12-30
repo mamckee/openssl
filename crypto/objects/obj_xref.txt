@@ -23,36 +23,6 @@ RSA_SHA3_512		sha3_512 rsaEncryption
 rsassaPss		undef	rsaEncryption
 ED25519		    undef	ED25519
 ED448		    undef	ED448
-##### OQS_TEMPLATE_FRAGMENT_LIST_OQS_SIGS_START
-dilithium2	sha512	dilithium2
-p256_dilithium2	sha512	p256_dilithium2
-rsa3072_dilithium2	sha512	rsa3072_dilithium2
-dilithium3	sha512	dilithium3
-p384_dilithium3	sha512	p384_dilithium3
-dilithium5	sha512	dilithium5
-p521_dilithium5	sha512	p521_dilithium5
-dilithium2_aes	sha512	dilithium2_aes
-p256_dilithium2_aes	sha512	p256_dilithium2_aes
-rsa3072_dilithium2_aes	sha512	rsa3072_dilithium2_aes
-dilithium3_aes	sha512	dilithium3_aes
-p384_dilithium3_aes	sha512	p384_dilithium3_aes
-dilithium5_aes	sha512	dilithium5_aes
-p521_dilithium5_aes	sha512	p521_dilithium5_aes
-falcon512	sha512	falcon512
-p256_falcon512	sha512	p256_falcon512
-rsa3072_falcon512	sha512	rsa3072_falcon512
-falcon1024	sha512	falcon1024
-p521_falcon1024	sha512	p521_falcon1024
-sphincsharaka128frobust	sha512	sphincsharaka128frobust
-p256_sphincsharaka128frobust	sha512	p256_sphincsharaka128frobust
-rsa3072_sphincsharaka128frobust	sha512	rsa3072_sphincsharaka128frobust
-sphincssha256128frobust	sha512	sphincssha256128frobust
-p256_sphincssha256128frobust	sha512	p256_sphincssha256128frobust
-rsa3072_sphincssha256128frobust	sha512	rsa3072_sphincssha256128frobust
-sphincsshake256128frobust	sha512	sphincsshake256128frobust
-p256_sphincsshake256128frobust	sha512	p256_sphincsshake256128frobust
-rsa3072_sphincsshake256128frobust	sha512	rsa3072_sphincsshake256128frobust
-##### OQS_TEMPLATE_FRAGMENT_LIST_OQS_SIGS_END
 
 
 # Alternative deprecated OIDs. By using the older "rsa" OID this

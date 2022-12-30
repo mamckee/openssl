@@ -11,13 +11,3 @@
 {%- if kem['bit_security'] == 256 -%} p521_{{ kem['name_group'] }}            {{ count.val }} {%- endif %}
 {% set count.val = count.val + 1 -%}
 {%- endfor -%}
-{%- for sig in config['sigs'] -%}
-    {%- for variant in sig['variants'] -%}
-{{ variant['name'] }}		{{ count.val }}
-{% set count.val = count.val + 1 -%}
-        {%- for classical_alg in variant['mix_with'] -%}
-{{ classical_alg['name'] }}_{{ variant['name'] }}		{{ count.val }}
-{% set count.val = count.val + 1 -%}
-        {%- endfor %}
-    {%- endfor %}
-{%- endfor -%}

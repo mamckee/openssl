@@ -112,35 +112,6 @@ extern const EVP_PKEY_METHOD tls1_prf_pkey_meth;
 extern const EVP_PKEY_METHOD hkdf_pkey_meth;
 extern const EVP_PKEY_METHOD poly1305_pkey_meth;
 extern const EVP_PKEY_METHOD siphash_pkey_meth;
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_METHS_START
-extern const EVP_PKEY_METHOD dilithium2_pkey_meth;
-extern const EVP_PKEY_METHOD p256_dilithium2_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_dilithium2_pkey_meth;
-extern const EVP_PKEY_METHOD dilithium3_pkey_meth;
-extern const EVP_PKEY_METHOD p384_dilithium3_pkey_meth;
-extern const EVP_PKEY_METHOD dilithium5_pkey_meth;
-extern const EVP_PKEY_METHOD p521_dilithium5_pkey_meth;
-extern const EVP_PKEY_METHOD dilithium2_aes_pkey_meth;
-extern const EVP_PKEY_METHOD p256_dilithium2_aes_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_dilithium2_aes_pkey_meth;
-extern const EVP_PKEY_METHOD dilithium3_aes_pkey_meth;
-extern const EVP_PKEY_METHOD p384_dilithium3_aes_pkey_meth;
-extern const EVP_PKEY_METHOD dilithium5_aes_pkey_meth;
-extern const EVP_PKEY_METHOD p521_dilithium5_aes_pkey_meth;
-extern const EVP_PKEY_METHOD falcon512_pkey_meth;
-extern const EVP_PKEY_METHOD p256_falcon512_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_falcon512_pkey_meth;
-extern const EVP_PKEY_METHOD falcon1024_pkey_meth;
-extern const EVP_PKEY_METHOD p521_falcon1024_pkey_meth;
-extern const EVP_PKEY_METHOD sphincsharaka128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD p256_sphincsharaka128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_sphincsharaka128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD sphincssha256128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD p256_sphincssha256128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_sphincssha256128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD sphincsshake256128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD p256_sphincsshake256128frobust_pkey_meth;
-extern const EVP_PKEY_METHOD rsa3072_sphincsshake256128frobust_pkey_meth;///// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_METHS_END
 
 struct evp_md_st {
     int type;

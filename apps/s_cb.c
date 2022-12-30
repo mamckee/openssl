@@ -251,64 +251,6 @@ static const char *get_sigtype(int nid)
     case NID_id_GostR3410_2012_512:
         return "gost2012_512";
 
-///// OQS_TEMPLATE_FRAGMENT_SIG_NAME_STR_START
-    case NID_dilithium2:
-        return "Dilithium2";
-    case NID_p256_dilithium2:
-        return "ECDSA p256 - Dilithium2";
-    case NID_rsa3072_dilithium2:
-        return "RSA3072 - Dilithium2";
-    case NID_dilithium3:
-        return "Dilithium3";
-    case NID_p384_dilithium3:
-        return "ECDSA p384 - Dilithium3";
-    case NID_dilithium5:
-        return "Dilithium5";
-    case NID_p521_dilithium5:
-        return "ECDSA p521 - Dilithium5";
-    case NID_dilithium2_aes:
-        return "Dilithium2_AES";
-    case NID_p256_dilithium2_aes:
-        return "ECDSA p256 - Dilithium2_AES";
-    case NID_rsa3072_dilithium2_aes:
-        return "RSA3072 - Dilithium2_AES";
-    case NID_dilithium3_aes:
-        return "Dilithium3_AES";
-    case NID_p384_dilithium3_aes:
-        return "ECDSA p384 - Dilithium3_AES";
-    case NID_dilithium5_aes:
-        return "Dilithium5_AES";
-    case NID_p521_dilithium5_aes:
-        return "ECDSA p521 - Dilithium5_AES";
-    case NID_falcon512:
-        return "Falcon-512";
-    case NID_p256_falcon512:
-        return "ECDSA p256 - Falcon-512";
-    case NID_rsa3072_falcon512:
-        return "RSA3072 - Falcon-512";
-    case NID_falcon1024:
-        return "Falcon-1024";
-    case NID_p521_falcon1024:
-        return "ECDSA p521 - Falcon-1024";
-    case NID_sphincsharaka128frobust:
-        return "SPHINCS+-Haraka-128f-robust";
-    case NID_p256_sphincsharaka128frobust:
-        return "ECDSA p256 - SPHINCS+-Haraka-128f-robust";
-    case NID_rsa3072_sphincsharaka128frobust:
-        return "RSA3072 - SPHINCS+-Haraka-128f-robust";
-    case NID_sphincssha256128frobust:
-        return "SPHINCS+-SHA256-128f-robust";
-    case NID_p256_sphincssha256128frobust:
-        return "ECDSA p256 - SPHINCS+-SHA256-128f-robust";
-    case NID_rsa3072_sphincssha256128frobust:
-        return "RSA3072 - SPHINCS+-SHA256-128f-robust";
-    case NID_sphincsshake256128frobust:
-        return "SPHINCS+-SHAKE256-128f-robust";
-    case NID_p256_sphincsshake256128frobust:
-        return "ECDSA p256 - SPHINCS+-SHAKE256-128f-robust";
-    case NID_rsa3072_sphincsshake256128frobust:
-        return "RSA3072 - SPHINCS+-SHAKE256-128f-robust";
-///// OQS_TEMPLATE_FRAGMENT_SIG_NAME_STR_END
     default:
         return NULL;
     }
@@ -461,42 +403,20 @@ int ssl_print_groups(BIO *out, SSL *s, int noshared)
 static const char* OQS_CURVE_ID_NAME_STR(int id) {
   switch(id) {
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_START
-  case 0x0200: return "frodo640aes";
-  case 0x0201: return "frodo640shake";
-  case 0x0202: return "frodo976aes";
-  case 0x0203: return "frodo976shake";
-  case 0x0204: return "frodo1344aes";
-  case 0x0205: return "frodo1344shake";
   case 0x023A: return "kyber512";
   case 0x023C: return "kyber768";
   case 0x023D: return "kyber1024";
-  case 0x0238: return "bikel1";
-  case 0x023B: return "bikel3";
   case 0x023E: return "kyber90s512";
   case 0x023F: return "kyber90s768";
   case 0x0240: return "kyber90s1024";
-  case 0x022C: return "hqc128";
-  case 0x022D: return "hqc192";
-  case 0x022E: return "hqc256";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_START
-   case 0x2F00: return "p256_frodo640aes hybrid";
-   case 0x2F01: return "p256_frodo640shake hybrid";
-   case 0x2F02: return "p384_frodo976aes hybrid";
-   case 0x2F03: return "p384_frodo976shake hybrid";
-   case 0x2F04: return "p521_frodo1344aes hybrid";
-   case 0x2F05: return "p521_frodo1344shake hybrid";
    case 0x2F3A: return "p256_kyber512 hybrid";
    case 0x2F3C: return "p384_kyber768 hybrid";
    case 0x2F3D: return "p521_kyber1024 hybrid";
-   case 0x2F38: return "p256_bikel1 hybrid";
-   case 0x2F3B: return "p384_bikel3 hybrid";
    case 0x2F3E: return "p256_kyber90s512 hybrid";
    case 0x2F3F: return "p384_kyber90s768 hybrid";
    case 0x2F40: return "p521_kyber90s1024 hybrid";
-   case 0x2F2C: return "p256_hqc128 hybrid";
-   case 0x2F2D: return "p384_hqc192 hybrid";
-   case 0x2F2E: return "p521_hqc256 hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_END
   default: return "";
   }

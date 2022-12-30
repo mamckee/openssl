@@ -86,36 +86,6 @@ extern const EVP_PKEY_ASN1_METHOD rsa_asn1_meths[2];
 extern const EVP_PKEY_ASN1_METHOD rsa_pss_asn1_meth;
 extern const EVP_PKEY_ASN1_METHOD siphash_asn1_meth;
 
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_ASN1_METHS_START
-extern const EVP_PKEY_ASN1_METHOD dilithium2_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_dilithium2_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_dilithium2_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD dilithium3_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p384_dilithium3_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD dilithium5_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p521_dilithium5_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD dilithium2_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_dilithium2_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_dilithium2_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD dilithium3_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p384_dilithium3_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD dilithium5_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p521_dilithium5_aes_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD falcon512_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_falcon512_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_falcon512_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD falcon1024_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p521_falcon1024_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD sphincsharaka128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_sphincsharaka128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_sphincsharaka128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD sphincssha256128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_sphincssha256128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_sphincssha256128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD sphincsshake256128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD p256_sphincsshake256128frobust_asn1_meth;
-extern const EVP_PKEY_ASN1_METHOD rsa3072_sphincsshake256128frobust_asn1_meth;///// OQS_TEMPLATE_FRAGMENT_DEFINE_ASN1_METHS_END
-
 /*
  * These are used internally in the ASN1_OBJECT to keep track of whether the
  * names and data need to be free()ed

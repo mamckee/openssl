@@ -1,42 +1,18 @@
 ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_START
 #define QSC_KEMS \
-    { 0x0200, "frodo640aes" }, \
-    { 0x2F00, "p256_frodo640aes" }, \
-    { 0x0201, "frodo640shake" }, \
-    { 0x2F01, "p256_frodo640shake" }, \
-    { 0x0202, "frodo976aes" }, \
-    { 0x2F02, "p384_frodo976aes" }, \
-    { 0x0203, "frodo976shake" }, \
-    { 0x2F03, "p384_frodo976shake" }, \
-    { 0x0204, "frodo1344aes" }, \
-    { 0x2F04, "p521_frodo1344aes" }, \
-    { 0x0205, "frodo1344shake" }, \
-    { 0x2F05, "p521_frodo1344shake" }, \
     { 0x023A, "kyber512" }, \
     { 0x2F3A, "p256_kyber512" }, \
     { 0x023C, "kyber768" }, \
     { 0x2F3C, "p384_kyber768" }, \
     { 0x023D, "kyber1024" }, \
     { 0x2F3D, "p521_kyber1024" }, \
-    { 0x0238, "bikel1" }, \
-    { 0x2F38, "p256_bikel1" }, \
-    { 0x023B, "bikel3" }, \
-    { 0x2F3B, "p384_bikel3" }, \
     { 0x023E, "kyber90s512" }, \
     { 0x2F3E, "p256_kyber90s512" }, \
     { 0x023F, "kyber90s768" }, \
     { 0x2F3F, "p384_kyber90s768" }, \
     { 0x0240, "kyber90s1024" }, \
     { 0x2F40, "p521_kyber90s1024" }, \
-    { 0x022C, "hqc128" }, \
-    { 0x2F2C, "p256_hqc128" }, \
-    { 0x022D, "hqc192" }, \
-    { 0x2F2D, "p384_hqc192" }, \
-    { 0x022E, "hqc256" }, \
-    { 0x2F2E, "p521_hqc256" }, \
-///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
-
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_CPS_START
+///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_EN///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_CPS_START
 #define QSC_SIG_CPS \
     { 0xfea0, "dilithium2" }, \
     { 0xfea1, "p256_dilithium2" }, \
@@ -60,45 +36,85 @@
     { 0xfe42, "sphincsharaka128frobust" }, \
     { 0xfe43, "p256_sphincsharaka128frobust" }, \
     { 0xfe44, "rsa3072_sphincsharaka128frobust" }, \
+    { 0xfe45, "sphincsharaka128fsimple" }, \
+    { 0xfe46, "p256_sphincsharaka128fsimple" }, \
+    { 0xfe47, "rsa3072_sphincsharaka128fsimple" }, \
+    { 0xfe48, "sphincsharaka128srobust" }, \
+    { 0xfe49, "p256_sphincsharaka128srobust" }, \
+    { 0xfe4a, "rsa3072_sphincsharaka128srobust" }, \
+    { 0xfe4b, "sphincsharaka128ssimple" }, \
+    { 0xfe4c, "p256_sphincsharaka128ssimple" }, \
+    { 0xfe4d, "rsa3072_sphincsharaka128ssimple" }, \
+    { 0xfe4e, "sphincsharaka192frobust" }, \
+    { 0xfe4f, "p384_sphincsharaka192frobust" }, \
+    { 0xfe50, "sphincsharaka192fsimple" }, \
+    { 0xfe51, "p384_sphincsharaka192fsimple" }, \
+    { 0xfe52, "sphincsharaka192srobust" }, \
+    { 0xfe53, "p384_sphincsharaka192srobust" }, \
+    { 0xfe54, "sphincsharaka192ssimple" }, \
+    { 0xfe55, "p384_sphincsharaka192ssimple" }, \
+    { 0xfe56, "sphincsharaka256frobust" }, \
+    { 0xfe57, "p521_sphincsharaka256frobust" }, \
+    { 0xfe58, "sphincsharaka256fsimple" }, \
+    { 0xfe59, "p521_sphincsharaka256fsimple" }, \
+    { 0xfe5a, "sphincsharaka256srobust" }, \
+    { 0xfe5b, "p521_sphincsharaka256srobust" }, \
+    { 0xfe5c, "sphincsharaka256ssimple" }, \
+    { 0xfe5d, "p521_sphincsharaka256ssimple" }, \
     { 0xfe5e, "sphincssha256128frobust" }, \
     { 0xfe5f, "p256_sphincssha256128frobust" }, \
     { 0xfe60, "rsa3072_sphincssha256128frobust" }, \
+    { 0xfe61, "sphincssha256128fsimple" }, \
+    { 0xfe62, "p256_sphincssha256128fsimple" }, \
+    { 0xfe63, "rsa3072_sphincssha256128fsimple" }, \
+    { 0xfe64, "sphincssha256128srobust" }, \
+    { 0xfe65, "p256_sphincssha256128srobust" }, \
+    { 0xfe66, "rsa3072_sphincssha256128srobust" }, \
+    { 0xfe67, "sphincssha256128ssimple" }, \
+    { 0xfe68, "p256_sphincssha256128ssimple" }, \
+    { 0xfe69, "rsa3072_sphincssha256128ssimple" }, \
+    { 0xfe6a, "sphincssha256192frobust" }, \
+    { 0xfe6b, "p384_sphincssha256192frobust" }, \
+    { 0xfe6c, "sphincssha256192fsimple" }, \
+    { 0xfe6d, "p384_sphincssha256192fsimple" }, \
+    { 0xfe6e, "sphincssha256192srobust" }, \
+    { 0xfe6f, "p384_sphincssha256192srobust" }, \
+    { 0xfe70, "sphincssha256192ssimple" }, \
+    { 0xfe71, "p384_sphincssha256192ssimple" }, \
+    { 0xfe72, "sphincssha256256frobust" }, \
+    { 0xfe73, "p521_sphincssha256256frobust" }, \
+    { 0xfe74, "sphincssha256256fsimple" }, \
+    { 0xfe75, "p521_sphincssha256256fsimple" }, \
+    { 0xfe76, "sphincssha256256srobust" }, \
+    { 0xfe77, "p521_sphincssha256256srobust" }, \
+    { 0xfe78, "sphincssha256256ssimple" }, \
+    { 0xfe79, "p521_sphincssha256256ssimple" }, \
     { 0xfe7a, "sphincsshake256128frobust" }, \
     { 0xfe7b, "p256_sphincsshake256128frobust" }, \
     { 0xfe7c, "rsa3072_sphincsshake256128frobust" }, \
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_CPS_END
-
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_START
-#define QSC_SIGS \
-	oid_add_from_string("dilithium2", "1.3.6.1.4.1.2.267.7.4.4"); \
-	oid_add_from_string("p256_dilithium2", "1.3.9999.2.7.1"); \
-	oid_add_from_string("rsa3072_dilithium2", "1.3.9999.2.7.2"); \
-	oid_add_from_string("dilithium3", "1.3.6.1.4.1.2.267.7.6.5"); \
-	oid_add_from_string("p384_dilithium3", "1.3.9999.2.7.3"); \
-	oid_add_from_string("dilithium5", "1.3.6.1.4.1.2.267.7.8.7"); \
-	oid_add_from_string("p521_dilithium5", "1.3.9999.2.7.4"); \
-	oid_add_from_string("dilithium2_aes", "1.3.6.1.4.1.2.267.11.4.4"); \
-	oid_add_from_string("p256_dilithium2_aes", "1.3.9999.2.11.1"); \
-	oid_add_from_string("rsa3072_dilithium2_aes", "1.3.9999.2.11.2"); \
-	oid_add_from_string("dilithium3_aes", "1.3.6.1.4.1.2.267.11.6.5"); \
-	oid_add_from_string("p384_dilithium3_aes", "1.3.9999.2.11.3"); \
-	oid_add_from_string("dilithium5_aes", "1.3.6.1.4.1.2.267.11.8.7"); \
-	oid_add_from_string("p521_dilithium5_aes", "1.3.9999.2.11.4"); \
-	oid_add_from_string("falcon512", "1.3.9999.3.1"); \
-	oid_add_from_string("p256_falcon512", "1.3.9999.3.2"); \
-	oid_add_from_string("rsa3072_falcon512", "1.3.9999.3.3"); \
-	oid_add_from_string("falcon1024", "1.3.9999.3.4"); \
-	oid_add_from_string("p521_falcon1024", "1.3.9999.3.5"); \
-	oid_add_from_string("sphincsharaka128frobust", "1.3.9999.6.1.1"); \
-	oid_add_from_string("p256_sphincsharaka128frobust", "1.3.9999.6.1.2"); \
-	oid_add_from_string("rsa3072_sphincsharaka128frobust", "1.3.9999.6.1.3"); \
-	oid_add_from_string("sphincssha256128frobust", "1.3.9999.6.4.1"); \
-	oid_add_from_string("p256_sphincssha256128frobust", "1.3.9999.6.4.2"); \
-	oid_add_from_string("rsa3072_sphincssha256128frobust", "1.3.9999.6.4.3"); \
-	oid_add_from_string("sphincsshake256128frobust", "1.3.9999.6.7.1"); \
-	oid_add_from_string("p256_sphincsshake256128frobust", "1.3.9999.6.7.2"); \
-	oid_add_from_string("rsa3072_sphincsshake256128frobust", "1.3.9999.6.7.3"); \
-
-
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_END
-
+    { 0xfe7d, "sphincsshake256128fsimple" }, \
+    { 0xfe7e, "p256_sphincsshake256128fsimple" }, \
+    { 0xfe7f, "rsa3072_sphincsshake256128fsimple" }, \
+    { 0xfe80, "sphincsshake256128srobust" }, \
+    { 0xfe81, "p256_sphincsshake256128srobust" }, \
+    { 0xfe82, "rsa3072_sphincsshake256128srobust" }, \
+    { 0xfe83, "sphincsshake256128ssimple" }, \
+    { 0xfe84, "p256_sphincsshake256128ssimple" }, \
+    { 0xfe85, "rsa3072_sphincsshake256128ssimple" }, \
+    { 0xfe86, "sphincsshake256192frobust" }, \
+    { 0xfe87, "p384_sphincsshake256192frobust" }, \
+    { 0xfe88, "sphincsshake256192fsimple" }, \
+    { 0xfe89, "p384_sphincsshake256192fsimple" }, \
+    { 0xfe8a, "sphincsshake256192srobust" }, \
+    { 0xfe8b, "p384_sphincsshake256192srobust" }, \
+    { 0xfe8c, "sphincsshake256192ssimple" }, \
+    { 0xfe8d, "p384_sphincsshake256192ssimple" }, \
+    { 0xfe8e, "sphincsshake256256frobust" }, \
+    { 0xfe8f, "p521_sphincsshake256256frobust" }, \
+    { 0xfe90, "sphincsshake256256fsimple" }, \
+    { 0xfe91, "p521_sphincsshake256256fsimple" }, \
+    { 0xfe92, "sphincsshake256256srobust" }, \
+    { 0xfe93, "p521_sphincsshake256256srobust" }, \
+    { 0xfe94, "sphincsshake256256ssimple" }, \
+    { 0xfe95, "p521_sphincsshake256256ssimple" }, \
+D

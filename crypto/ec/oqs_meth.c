@@ -74,71 +74,18 @@ typedef enum {
     KEY_TYPE_PRIVATE,
 } oqs_key_type_t;
 
-int oqssl_sig_nids_list[] = {
-///// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_NIDS_START
-        NID_dilithium2,
-        NID_p256_dilithium2,
-        NID_rsa3072_dilithium2,
-        NID_dilithium3,
-        NID_p384_dilithium3,
-        NID_dilithium5,
-        NID_p521_dilithium5,
-        NID_dilithium2_aes,
-        NID_p256_dilithium2_aes,
-        NID_rsa3072_dilithium2_aes,
-        NID_dilithium3_aes,
-        NID_p384_dilithium3_aes,
-        NID_dilithium5_aes,
-        NID_p521_dilithium5_aes,
-        NID_falcon512,
-        NID_p256_falcon512,
-        NID_rsa3072_falcon512,
-        NID_falcon1024,
-        NID_p521_falcon1024,
-        NID_sphincsharaka128frobust,
-        NID_p256_sphincsharaka128frobust,
-        NID_rsa3072_sphincsharaka128frobust,
-        NID_sphincssha256128frobust,
-        NID_p256_sphincssha256128frobust,
-        NID_rsa3072_sphincssha256128frobust,
-        NID_sphincsshake256128frobust,
-        NID_p256_sphincsshake256128frobust,
-        NID_rsa3072_sphincsshake256128frobust,
-/////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_NIDS_END
-};
-
 int oqssl_kem_nids_list[] = {
 ///// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_START
-        NID_frodo640aes,
-        NID_frodo640shake,
-        NID_frodo976aes,
-        NID_frodo976shake,
-        NID_frodo1344aes,
-        NID_frodo1344shake,
         NID_kyber512,
         NID_kyber768,
         NID_kyber1024,
-        NID_bikel1,
-        NID_bikel3,
         NID_kyber90s512,
         NID_kyber90s768,
         NID_kyber90s1024,
-        NID_hqc128,
-        NID_hqc192,
-        NID_hqc256,
 /////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_END
 };
 
-static int* sig_nid_list = NULL;
 static int* kem_nid_list = NULL;
-
-int* get_oqssl_sig_nids() {
-   if (!sig_nid_list) {
-      sig_nid_list = OPENSSL_malloc(sizeof(oqssl_sig_nids_list));
-      memcpy(sig_nid_list, oqssl_sig_nids_list, sizeof(oqssl_sig_nids_list));
-   }
-   return sig_nid_list;
-}
 
 int* get_oqssl_kem_nids() {
    if (!kem_nid_list) {
@@ -156,63 +103,6 @@ char* get_oqs_alg_name(int openssl_nid)
   switch (openssl_nid)
   {
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_START
-    case NID_dilithium2:
-    case NID_p256_dilithium2:
-    case NID_rsa3072_dilithium2:
-      return OQS_SIG_alg_dilithium_2;
-    case NID_dilithium3:
-    case NID_p384_dilithium3:
-      return OQS_SIG_alg_dilithium_3;
-    case NID_dilithium5:
-    case NID_p521_dilithium5:
-      return OQS_SIG_alg_dilithium_5;
-    case NID_dilithium2_aes:
-    case NID_p256_dilithium2_aes:
-    case NID_rsa3072_dilithium2_aes:
-      return OQS_SIG_alg_dilithium_2_aes;
-    case NID_dilithium3_aes:
-    case NID_p384_dilithium3_aes:
-      return OQS_SIG_alg_dilithium_3_aes;
-    case NID_dilithium5_aes:
-    case NID_p521_dilithium5_aes:
-      return OQS_SIG_alg_dilithium_5_aes;
-    case NID_falcon512:
-    case NID_p256_falcon512:
-    case NID_rsa3072_falcon512:
-      return OQS_SIG_alg_falcon_512;
-    case NID_falcon1024:
-    case NID_p521_falcon1024:
-      return OQS_SIG_alg_falcon_1024;
-    case NID_sphincsharaka128frobust:
-    case NID_p256_sphincsharaka128frobust:
-    case NID_rsa3072_sphincsharaka128frobust:
-      return OQS_SIG_alg_sphincs_haraka_128f_robust;
-    case NID_sphincssha256128frobust:
-    case NID_p256_sphincssha256128frobust:
-    case NID_rsa3072_sphincssha256128frobust:
-      return OQS_SIG_alg_sphincs_sha256_128f_robust;
-    case NID_sphincsshake256128frobust:
-    case NID_p256_sphincsshake256128frobust:
-    case NID_rsa3072_sphincsshake256128frobust:
-      return OQS_SIG_alg_sphincs_shake256_128f_robust;
-    case NID_frodo640aes:
-    case NID_p256_frodo640aes:
-      return OQS_KEM_alg_frodokem_640_aes;
-    case NID_frodo640shake:
-    case NID_p256_frodo640shake:
-      return OQS_KEM_alg_frodokem_640_shake;
-    case NID_frodo976aes:
-    case NID_p384_frodo976aes:
-      return OQS_KEM_alg_frodokem_976_aes;
-    case NID_frodo976shake:
-    case NID_p384_frodo976shake:
-      return OQS_KEM_alg_frodokem_976_shake;
-    case NID_frodo1344aes:
-    case NID_p521_frodo1344aes:
-      return OQS_KEM_alg_frodokem_1344_aes;
-    case NID_frodo1344shake:
-    case NID_p521_frodo1344shake:
-      return OQS_KEM_alg_frodokem_1344_shake;
     case NID_kyber512:
     case NID_p256_kyber512:
       return OQS_KEM_alg_kyber_512;
@@ -222,12 +112,6 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_kyber1024:
     case NID_p521_kyber1024:
       return OQS_KEM_alg_kyber_1024;
-    case NID_bikel1:
-    case NID_p256_bikel1:
-      return OQS_KEM_alg_bike_l1;
-    case NID_bikel3:
-    case NID_p384_bikel3:
-      return OQS_KEM_alg_bike_l3;
     case NID_kyber90s512:
     case NID_p256_kyber90s512:
       return OQS_KEM_alg_kyber_512_90s;
@@ -237,15 +121,6 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_kyber90s1024:
     case NID_p521_kyber90s1024:
       return OQS_KEM_alg_kyber_1024_90s;
-    case NID_hqc128:
-    case NID_p256_hqc128:
-      return OQS_KEM_alg_hqc_128;
-    case NID_hqc192:
-    case NID_p384_hqc192:
-      return OQS_KEM_alg_hqc_192;
-    case NID_hqc256:
-    case NID_p521_hqc256:
-      return OQS_KEM_alg_hqc_256;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_END
     default:
       return NULL;
@@ -254,102 +129,16 @@ char* get_oqs_alg_name(int openssl_nid)
 
 static int is_oqs_hybrid_alg(int openssl_nid)
 {
-  switch (openssl_nid)
-  {
-///// OQS_TEMPLATE_FRAGMENT_LIST_HYBRID_NIDS_START
-    case NID_p256_dilithium2:
-    case NID_rsa3072_dilithium2:
-    case NID_p384_dilithium3:
-    case NID_p521_dilithium5:
-    case NID_p256_dilithium2_aes:
-    case NID_rsa3072_dilithium2_aes:
-    case NID_p384_dilithium3_aes:
-    case NID_p521_dilithium5_aes:
-    case NID_p256_falcon512:
-    case NID_rsa3072_falcon512:
-    case NID_p521_falcon1024:
-    case NID_p256_sphincsharaka128frobust:
-    case NID_rsa3072_sphincsharaka128frobust:
-    case NID_p256_sphincssha256128frobust:
-    case NID_rsa3072_sphincssha256128frobust:
-    case NID_p256_sphincsshake256128frobust:
-    case NID_rsa3072_sphincsshake256128frobust:
-///// OQS_TEMPLATE_FRAGMENT_LIST_HYBRID_NIDS_END
-      return 1;
-    default:
-      return 0;
-  }
+  return 0;
 }
-
-
 static int get_classical_nid(int hybrid_id)
 {
-  switch (hybrid_id)
-  {
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_CLASSICAL_NIDS_START
-    case NID_rsa3072_dilithium2:
-    case NID_rsa3072_dilithium2_aes:
-    case NID_rsa3072_falcon512:
-    case NID_rsa3072_sphincsharaka128frobust:
-    case NID_rsa3072_sphincssha256128frobust:
-    case NID_rsa3072_sphincsshake256128frobust:
-      return NID_rsaEncryption;
-    case NID_p256_dilithium2:
-    case NID_p256_dilithium2_aes:
-    case NID_p256_falcon512:
-    case NID_p256_sphincsharaka128frobust:
-    case NID_p256_sphincssha256128frobust:
-    case NID_p256_sphincsshake256128frobust:
-      return NID_X9_62_prime256v1;
-    case NID_p384_dilithium3:
-    case NID_p384_dilithium3_aes:
-      return NID_secp384r1;
-    case NID_p521_dilithium5:
-    case NID_p521_dilithium5_aes:
-    case NID_p521_falcon1024:
-      return NID_secp521r1;///// OQS_TEMPLATE_FRAGMENT_ASSIGN_CLASSICAL_NIDS_END
-    default:
-      return 0;
-  }
+  return 0;
 }
 
 static int get_oqs_nid(int hybrid_id)
 {
-  switch (hybrid_id)
-  {
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_OQS_NID_START
-    case NID_p256_dilithium2:
-    case NID_rsa3072_dilithium2:
-      return NID_dilithium2;
-    case NID_p384_dilithium3:
-      return NID_dilithium3;
-    case NID_p521_dilithium5:
-      return NID_dilithium5;
-    case NID_p256_dilithium2_aes:
-    case NID_rsa3072_dilithium2_aes:
-      return NID_dilithium2_aes;
-    case NID_p384_dilithium3_aes:
-      return NID_dilithium3_aes;
-    case NID_p521_dilithium5_aes:
-      return NID_dilithium5_aes;
-    case NID_p256_falcon512:
-    case NID_rsa3072_falcon512:
-      return NID_falcon512;
-    case NID_p521_falcon1024:
-      return NID_falcon1024;
-    case NID_p256_sphincsharaka128frobust:
-    case NID_rsa3072_sphincsharaka128frobust:
-      return NID_sphincsharaka128frobust;
-    case NID_p256_sphincssha256128frobust:
-    case NID_rsa3072_sphincssha256128frobust:
-      return NID_sphincssha256128frobust;
-    case NID_p256_sphincsshake256128frobust:
-    case NID_rsa3072_sphincsshake256128frobust:
-      return NID_sphincsshake256128frobust;
-///// OQS_TEMPLATE_FRAGMENT_ASSIGN_OQS_NID_END
-    default:
-      return 0;
-  }
+  return 0;
 }
 
 static int get_classical_key_len(oqs_key_type_t keytype, int classical_id) {
@@ -418,94 +207,6 @@ const char *OQSKEM_options(void)
        }
     }
     return result;
-}
-
-/*
- * Returns options when running OQS SIG, e.g., in openssl speed
- */
-const char *OQSSIG_options(void)
-{
-    int offset;
-// TODO: Revisit which OQS_COMPILE_FLAGS to show
-#ifdef OQS_COMPILE_CFLAGS
-    const char* OQSSIGALGS = "OQS SIG build : ";
-    char* result =  OPENSSL_zalloc(strlen(OQS_COMPILE_CFLAGS)+OQS_OPENSSL_SIG_algs_length*40); // OK, a bit pessimistic but this will be removed very soon...
-    memcpy(result, OQSSIGALGS, offset = strlen(OQSSIGALGS));
-    memcpy(result+offset, OQS_COMPILE_CFLAGS, strlen(OQS_COMPILE_CFLAGS));
-    offset += strlen(OQS_COMPILE_CFLAGS);
-#else
-    const char* OQSSIGALGS = "";
-    char* result =  OPENSSL_zalloc(OQS_OPENSSL_SIG_algs_length*40); // OK, a bit pessimistic but this will be removed very soon...
-    memcpy(result, OQSSIGALGS, offset = strlen(OQSSIGALGS));
-#endif
-
-    result[offset++]='-';
-    int i;
-    for (i=0; i<OQS_OPENSSL_SIG_algs_length;i++) {
-       const char* name = OBJ_nid2sn(oqssl_sig_nids_list[i]);
-       if (OQS_SIG_alg_is_enabled(get_oqs_alg_name(oqssl_sig_nids_list[i]))) {
-           int l = strlen(name);
-           memcpy(result+offset, name, l);
-           if (i<OQS_OPENSSL_SIG_algs_length-1) {
-              result[offset+l]=',';
-              offset = offset+l+1;
-           }
-       }
-    }
-    return result;
-}
-
-/*
- * Returns the security level in bits for an OQS alg.
- */
-static int get_oqs_security_bits(int openssl_nid)
-{
-  switch (openssl_nid)
-  {
-///// OQS_TEMPLATE_FRAGMENT_GET_SIG_SECURITY_BITS_START
-    case NID_dilithium2:
-    case NID_p256_dilithium2:
-    case NID_rsa3072_dilithium2:
-      return 128;
-    case NID_dilithium3:
-    case NID_p384_dilithium3:
-      return 192;
-    case NID_dilithium5:
-    case NID_p521_dilithium5:
-      return 256;
-    case NID_dilithium2_aes:
-    case NID_p256_dilithium2_aes:
-    case NID_rsa3072_dilithium2_aes:
-      return 128;
-    case NID_dilithium3_aes:
-    case NID_p384_dilithium3_aes:
-      return 192;
-    case NID_dilithium5_aes:
-    case NID_p521_dilithium5_aes:
-      return 256;
-    case NID_falcon512:
-    case NID_p256_falcon512:
-    case NID_rsa3072_falcon512:
-      return 128;
-    case NID_falcon1024:
-    case NID_p521_falcon1024:
-      return 256;
-    case NID_sphincsharaka128frobust:
-    case NID_p256_sphincsharaka128frobust:
-    case NID_rsa3072_sphincsharaka128frobust:
-      return 128;
-    case NID_sphincssha256128frobust:
-    case NID_p256_sphincssha256128frobust:
-    case NID_rsa3072_sphincssha256128frobust:
-      return 128;
-    case NID_sphincsshake256128frobust:
-    case NID_p256_sphincsshake256128frobust:
-    case NID_rsa3072_sphincsshake256128frobust:
-      return 128;
-///// OQS_TEMPLATE_FRAGMENT_GET_SIG_SECURITY_BITS_END
-    default:
-      return 0;
-  }
 }
 
 static int is_EC_nid(int nid) {
@@ -1071,40 +772,7 @@ static int oqs_item_verify(EVP_MD_CTX *ctx, const ASN1_ITEM *it, void *asn,
     /* Sanity check: make sure it is an OQS scheme with absent parameters */
     X509_ALGOR_get0(&obj, &ptype, NULL, sigalg);
     nid = OBJ_obj2nid(obj);
-    if (
-    (
-///// OQS_TEMPLATE_FRAGMENT_CHECK_IF_KNOWN_NID_START
-        nid != NID_dilithium2 &&
-        nid != NID_p256_dilithium2 &&
-        nid != NID_rsa3072_dilithium2 &&
-        nid != NID_dilithium3 &&
-        nid != NID_p384_dilithium3 &&
-        nid != NID_dilithium5 &&
-        nid != NID_p521_dilithium5 &&
-        nid != NID_dilithium2_aes &&
-        nid != NID_p256_dilithium2_aes &&
-        nid != NID_rsa3072_dilithium2_aes &&
-        nid != NID_dilithium3_aes &&
-        nid != NID_p384_dilithium3_aes &&
-        nid != NID_dilithium5_aes &&
-        nid != NID_p521_dilithium5_aes &&
-        nid != NID_falcon512 &&
-        nid != NID_p256_falcon512 &&
-        nid != NID_rsa3072_falcon512 &&
-        nid != NID_falcon1024 &&
-        nid != NID_p521_falcon1024 &&
-        nid != NID_sphincsharaka128frobust &&
-        nid != NID_p256_sphincsharaka128frobust &&
-        nid != NID_rsa3072_sphincsharaka128frobust &&
-        nid != NID_sphincssha256128frobust &&
-        nid != NID_p256_sphincssha256128frobust &&
-        nid != NID_rsa3072_sphincssha256128frobust &&
-        nid != NID_sphincsshake256128frobust &&
-        nid != NID_p256_sphincsshake256128frobust &&
-        nid != NID_rsa3072_sphincsshake256128frobust &&
-        1 /* This is just to faciliate templating. */
-///// OQS_TEMPLATE_FRAGMENT_CHECK_IF_KNOWN_NID_END
-    ) || ptype != V_ASN1_UNDEF) {
+    if (ptype != V_ASN1_UNDEF) {
         ECerr(EC_F_OQS_ITEM_VERIFY, EC_R_UNKNOWN_NID);
         return 0;
     }
@@ -1661,33 +1329,3 @@ DEFINE_OQS_ITEM_SIGN(ALG, NID_ALG)                                    \
 DEFINE_OQS_SIGN_INFO_SET(ALG, NID_ALG)                                \
 DEFINE_OQS_EVP_PKEY_METHOD(ALG, NID_ALG)                              \
 DEFINE_OQS_EVP_PKEY_ASN1_METHOD(ALG, NID_ALG, SHORT_NAME, LONG_NAME)
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_EVP_METHS_START
-DEFINE_OQS_EVP_METHODS(dilithium2, NID_dilithium2, "dilithium2", "OpenSSL Dilithium2 algorithm")
-DEFINE_OQS_EVP_METHODS(p256_dilithium2, NID_p256_dilithium2, "p256_dilithium2", "OpenSSL ECDSA p256 Dilithium2 algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_dilithium2, NID_rsa3072_dilithium2, "rsa3072_dilithium2", "OpenSSL RSA3072 Dilithium2 algorithm")
-DEFINE_OQS_EVP_METHODS(dilithium3, NID_dilithium3, "dilithium3", "OpenSSL Dilithium3 algorithm")
-DEFINE_OQS_EVP_METHODS(p384_dilithium3, NID_p384_dilithium3, "p384_dilithium3", "OpenSSL ECDSA p384 Dilithium3 algorithm")
-DEFINE_OQS_EVP_METHODS(dilithium5, NID_dilithium5, "dilithium5", "OpenSSL Dilithium5 algorithm")
-DEFINE_OQS_EVP_METHODS(p521_dilithium5, NID_p521_dilithium5, "p521_dilithium5", "OpenSSL ECDSA p521 Dilithium5 algorithm")
-DEFINE_OQS_EVP_METHODS(dilithium2_aes, NID_dilithium2_aes, "dilithium2_aes", "OpenSSL Dilithium2_AES algorithm")
-DEFINE_OQS_EVP_METHODS(p256_dilithium2_aes, NID_p256_dilithium2_aes, "p256_dilithium2_aes", "OpenSSL ECDSA p256 Dilithium2_AES algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_dilithium2_aes, NID_rsa3072_dilithium2_aes, "rsa3072_dilithium2_aes", "OpenSSL RSA3072 Dilithium2_AES algorithm")
-DEFINE_OQS_EVP_METHODS(dilithium3_aes, NID_dilithium3_aes, "dilithium3_aes", "OpenSSL Dilithium3_AES algorithm")
-DEFINE_OQS_EVP_METHODS(p384_dilithium3_aes, NID_p384_dilithium3_aes, "p384_dilithium3_aes", "OpenSSL ECDSA p384 Dilithium3_AES algorithm")
-DEFINE_OQS_EVP_METHODS(dilithium5_aes, NID_dilithium5_aes, "dilithium5_aes", "OpenSSL Dilithium5_AES algorithm")
-DEFINE_OQS_EVP_METHODS(p521_dilithium5_aes, NID_p521_dilithium5_aes, "p521_dilithium5_aes", "OpenSSL ECDSA p521 Dilithium5_AES algorithm")
-DEFINE_OQS_EVP_METHODS(falcon512, NID_falcon512, "falcon512", "OpenSSL Falcon-512 algorithm")
-DEFINE_OQS_EVP_METHODS(p256_falcon512, NID_p256_falcon512, "p256_falcon512", "OpenSSL ECDSA p256 Falcon-512 algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_falcon512, NID_rsa3072_falcon512, "rsa3072_falcon512", "OpenSSL RSA3072 Falcon-512 algorithm")
-DEFINE_OQS_EVP_METHODS(falcon1024, NID_falcon1024, "falcon1024", "OpenSSL Falcon-1024 algorithm")
-DEFINE_OQS_EVP_METHODS(p521_falcon1024, NID_p521_falcon1024, "p521_falcon1024", "OpenSSL ECDSA p521 Falcon-1024 algorithm")
-DEFINE_OQS_EVP_METHODS(sphincsharaka128frobust, NID_sphincsharaka128frobust, "sphincsharaka128frobust", "OpenSSL SPHINCS+-Haraka-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(p256_sphincsharaka128frobust, NID_p256_sphincsharaka128frobust, "p256_sphincsharaka128frobust", "OpenSSL ECDSA p256 SPHINCS+-Haraka-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_sphincsharaka128frobust, NID_rsa3072_sphincsharaka128frobust, "rsa3072_sphincsharaka128frobust", "OpenSSL RSA3072 SPHINCS+-Haraka-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(sphincssha256128frobust, NID_sphincssha256128frobust, "sphincssha256128frobust", "OpenSSL SPHINCS+-SHA256-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(p256_sphincssha256128frobust, NID_p256_sphincssha256128frobust, "p256_sphincssha256128frobust", "OpenSSL ECDSA p256 SPHINCS+-SHA256-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_sphincssha256128frobust, NID_rsa3072_sphincssha256128frobust, "rsa3072_sphincssha256128frobust", "OpenSSL RSA3072 SPHINCS+-SHA256-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(sphincsshake256128frobust, NID_sphincsshake256128frobust, "sphincsshake256128frobust", "OpenSSL SPHINCS+-SHAKE256-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(p256_sphincsshake256128frobust, NID_p256_sphincsshake256128frobust, "p256_sphincsshake256128frobust", "OpenSSL ECDSA p256 SPHINCS+-SHAKE256-128f-robust algorithm")
-DEFINE_OQS_EVP_METHODS(rsa3072_sphincsshake256128frobust, NID_rsa3072_sphincsshake256128frobust, "rsa3072_sphincsshake256128frobust", "OpenSSL RSA3072 SPHINCS+-SHAKE256-128f-robust algorithm")
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_EVP_METHS_END

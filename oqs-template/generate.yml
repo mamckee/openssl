@@ -1,70 +1,70 @@
 # N.B: For interoperability, NIDS must match the curve IDs used in
 # https://docs.google.com/spreadsheets/d/12YarzaNv3XQNLnvDsWLlRKwtZFhRrDdWf36YlzwrPeg/edit#gid=0
 kems:
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo640aes'
-    nid: '0x0200'
-    nid_hybrid: '0x2F00'
-    oqs_alg: 'OQS_KEM_alg_frodokem_640_aes'
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo640shake'
-    nid: '0x0201'
-    nid_hybrid: '0x2F01'
-    oqs_alg: 'OQS_KEM_alg_frodokem_640_shake'
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo976aes'
-    nid: '0x0202'
-    nid_hybrid: '0x2F02'
-    oqs_alg: 'OQS_KEM_alg_frodokem_976_aes'
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo976shake'
-    nid: '0x0203'
-    nid_hybrid: '0x2F03'
-    oqs_alg: 'OQS_KEM_alg_frodokem_976_shake'
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo1344aes'
-    nid: '0x0204'
-    nid_hybrid: '0x2F04'
-    oqs_alg: 'OQS_KEM_alg_frodokem_1344_aes'
-  -
-    family: 'FrodoKEM'
-    name_group: 'frodo1344shake'
-    nid: '0x0205'
-    nid_hybrid: '0x2F05'
-    oqs_alg: 'OQS_KEM_alg_frodokem_1344_shake'
-  -
-    family: 'BIKE'
-    name_group: 'bike1l1cpa'
-    bit_security: 128
-    extra_nids:
-      old:
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          nid: '0x0206'
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          hybrid_group: secp256_r1
-          nid: '0x2F06'
-    oqs_alg: 'OQS_KEM_alg_bike1_l1_cpa'
-  -
-    family: 'BIKE'
-    name_group: 'bike1l3cpa'
-    bit_security: 192
-    extra_nids:
-      old:
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          nid: '0x0207'
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          hybrid_group: secp384_r1
-          nid: '0x2F07'
-    oqs_alg: 'OQS_KEM_alg_bike1_l3_cpa'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo640aes'
+  #   nid: '0x0200'
+  #   nid_hybrid: '0x2F00'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_640_aes'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo640shake'
+  #   nid: '0x0201'
+  #   nid_hybrid: '0x2F01'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_640_shake'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo976aes'
+  #   nid: '0x0202'
+  #   nid_hybrid: '0x2F02'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_976_aes'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo976shake'
+  #   nid: '0x0203'
+  #   nid_hybrid: '0x2F03'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_976_shake'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo1344aes'
+  #   nid: '0x0204'
+  #   nid_hybrid: '0x2F04'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_1344_aes'
+  # -
+  #   family: 'FrodoKEM'
+  #   name_group: 'frodo1344shake'
+  #   nid: '0x0205'
+  #   nid_hybrid: '0x2F05'
+  #   oqs_alg: 'OQS_KEM_alg_frodokem_1344_shake'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bike1l1cpa'
+  #   bit_security: 128
+  #   extra_nids:
+  #     old:
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         nid: '0x0206'
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         hybrid_group: secp256_r1
+  #         nid: '0x2F06'
+  #   oqs_alg: 'OQS_KEM_alg_bike1_l1_cpa'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bike1l3cpa'
+  #   bit_security: 192
+  #   extra_nids:
+  #     old:
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         nid: '0x0207'
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         hybrid_group: secp384_r1
+  #         nid: '0x2F07'
+  #   oqs_alg: 'OQS_KEM_alg_bike1_l3_cpa'
   -
     family: 'CRYSTALS-Kyber'
     name_group: 'kyber512'
@@ -117,57 +117,57 @@ kems:
           hybrid_group: secp521_r1
           nid: '0x2F11'
     oqs_alg: 'OQS_KEM_alg_kyber_1024'
-  -
-    family: 'BIKE'
-    name_group: 'bike1l1fo'
-    bit_security: 128
-    extra_nids:
-      old:
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          nid: '0x0223'
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          hybrid_group: secp256_r1
-          nid: '0x2F23'
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          hybrid_group: "x25519"
-          nid: '0x2F28'
-    oqs_alg: 'OQS_KEM_alg_bike1_l1_fo'
-  -
-    family: 'BIKE'
-    name_group: 'bike1l3fo'
-    bit_security: 192
-    extra_nids:
-      old:
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          nid: '0x0224'
-        - implementation_version: NIST Round 2 submission
-          nist-round: 2
-          hybrid_group: secp384_r1
-          nid: '0x2F24'
-    oqs_alg: 'OQS_KEM_alg_bike1_l3_fo'
-  -
-    family: 'BIKE'
-    name_group: 'bikel1'
-    implementation_version: '4.1'
-    nid: '0x0238'
-    nid_hybrid: '0x2F38'
-    oqs_alg: 'OQS_KEM_alg_bike_l1'
-    extra_nids:
-      current:
-        - hybrid_group: "x25519"
-          nid: '0x2F37'
-          implementation_version: '4.1'
-  -
-    family: 'BIKE'
-    name_group: 'bikel3'
-    implementation_version: '4.1'
-    nid: '0x023B'
-    nid_hybrid: '0x2F3B'
-    oqs_alg: 'OQS_KEM_alg_bike_l3'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bike1l1fo'
+  #   bit_security: 128
+  #   extra_nids:
+  #     old:
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         nid: '0x0223'
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         hybrid_group: secp256_r1
+  #         nid: '0x2F23'
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         hybrid_group: "x25519"
+  #         nid: '0x2F28'
+  #   oqs_alg: 'OQS_KEM_alg_bike1_l1_fo'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bike1l3fo'
+  #   bit_security: 192
+  #   extra_nids:
+  #     old:
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         nid: '0x0224'
+  #       - implementation_version: NIST Round 2 submission
+  #         nist-round: 2
+  #         hybrid_group: secp384_r1
+  #         nid: '0x2F24'
+  #   oqs_alg: 'OQS_KEM_alg_bike1_l3_fo'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bikel1'
+  #   implementation_version: '4.1'
+  #   nid: '0x0238'
+  #   nid_hybrid: '0x2F38'
+  #   oqs_alg: 'OQS_KEM_alg_bike_l1'
+  #   extra_nids:
+  #     current:
+  #       - hybrid_group: "x25519"
+  #         nid: '0x2F37'
+  #         implementation_version: '4.1'
+  # -
+  #   family: 'BIKE'
+  #   name_group: 'bikel3'
+  #   implementation_version: '4.1'
+  #   nid: '0x023B'
+  #   nid_hybrid: '0x2F3B'
+  #   oqs_alg: 'OQS_KEM_alg_bike_l3'
   -
     family: 'CRYSTALS-Kyber'
     name_group: 'kyber90s512'
@@ -213,24 +213,24 @@ kems:
           hybrid_group: secp521_r1
           nid: '0x2F2B'
     oqs_alg: 'OQS_KEM_alg_kyber_1024_90s'
-  -
-    family: 'HQC'
-    name_group: 'hqc128'
-    nid: '0x022C'
-    nid_hybrid: '0x2F2C'
-    oqs_alg: 'OQS_KEM_alg_hqc_128'
-  -
-    family: 'HQC'
-    name_group: 'hqc192'
-    nid: '0x022D'
-    nid_hybrid: '0x2F2D'
-    oqs_alg: 'OQS_KEM_alg_hqc_192'
-  -
-    family: 'HQC'
-    name_group: 'hqc256'
-    nid: '0x022E'
-    nid_hybrid: '0x2F2E'
-    oqs_alg: 'OQS_KEM_alg_hqc_256'
+  # -
+  #   family: 'HQC'
+  #   name_group: 'hqc128'
+  #   nid: '0x022C'
+  #   nid_hybrid: '0x2F2C'
+  #   oqs_alg: 'OQS_KEM_alg_hqc_128'
+  # -
+  #   family: 'HQC'
+  #   name_group: 'hqc192'
+  #   nid: '0x022D'
+  #   nid_hybrid: '0x2F2D'
+  #   oqs_alg: 'OQS_KEM_alg_hqc_192'
+  # -
+  #   family: 'HQC'
+  #   name_group: 'hqc256'
+  #   nid: '0x022E'
+  #   nid_hybrid: '0x2F2E'
+  #   oqs_alg: 'OQS_KEM_alg_hqc_256'
 
 kem_nid_end: '0x0250'
 kem_nid_hybrid_end: '0x2FFF'
@@ -252,7 +252,7 @@ sigs:
     #    oqs_meth: 'OQS_SIG_alg_default'
     #    oid: '1.3.9999.1.1'
     #    code_point: '0xfe00'
-    #    enable: true
+    #    enable: false
     #    mix_with: [{'name': 'p256',
     #                'pretty_name': 'ECDSA p256',
     #                'oid': '1.3.9999.1.2',
@@ -285,7 +285,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_2'
         oid: '1.3.6.1.4.1.2.267.7.4.4'
         code_point: '0xfea0'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.2.7.1',
@@ -300,7 +300,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_3'
         oid: '1.3.6.1.4.1.2.267.7.6.5'
         code_point: '0xfea3'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p384',
                     'pretty_name': 'ECDSA p384',
                     'oid': '1.3.9999.2.7.3',
@@ -311,7 +311,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_5'
         oid: '1.3.6.1.4.1.2.267.7.8.7'
         code_point: '0xfea5'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p521',
                     'pretty_name': 'ECDSA p521',
                     'oid': '1.3.9999.2.7.4',
@@ -322,7 +322,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_2_aes'
         oid: '1.3.6.1.4.1.2.267.11.4.4'
         code_point: '0xfea7'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.2.11.1',
@@ -337,7 +337,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_3_aes'
         oid: '1.3.6.1.4.1.2.267.11.6.5'
         code_point: '0xfeaa'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p384',
                     'pretty_name': 'ECDSA p384',
                     'oid': '1.3.9999.2.11.3',
@@ -348,7 +348,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_dilithium_5_aes'
         oid: '1.3.6.1.4.1.2.267.11.8.7'
         code_point: '0xfeac'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p521',
                     'pretty_name': 'ECDSA p521',
                     'oid': '1.3.9999.2.11.4',
@@ -366,7 +366,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_falcon_512'
         oid: '1.3.9999.3.1'
         code_point: '0xfe0b'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.3.2',
@@ -381,7 +381,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_falcon_1024'
         oid: '1.3.9999.3.4'
         code_point: '0xfe0e'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p521',
                     'pretty_name': 'ECDSA p521',
                     'oid': '1.3.9999.3.5',
@@ -395,7 +395,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_sphincs_haraka_128f_robust'
         oid: '1.3.9999.6.1.1'
         code_point: '0xfe42'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.6.1.2',
@@ -546,7 +546,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_sphincs_sha256_128f_robust'
         oid: '1.3.9999.6.4.1'
         code_point: '0xfe5e'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.6.4.2',
@@ -697,7 +697,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_sphincs_shake256_128f_robust'
         oid: '1.3.9999.6.7.1'
         code_point: '0xfe7a'
-        enable: true
+        enable: false
         mix_with: [{'name': 'p256',
                     'pretty_name': 'ECDSA p256',
                     'oid': '1.3.9999.6.7.2',

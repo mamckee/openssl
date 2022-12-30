@@ -93,16 +93,16 @@ def complete_config(config, oqsdocsdir = None):
              print("Cannot find security level for {:s} {:s}".format(kem['family'], kem['name_group']))
              exit(1)
          kem['bit_security'] = bits_level
-   for famsig in config['sigs']:
-      for sig in famsig['variants']:
-         if not "security" in sig.keys():
-            bits_level = nist_to_bits(get_sig_nistlevel(famsig, sig, oqsdocsdir))
-            if bits_level == None: 
-                if sig['name'].startswith("rainbowI"):
-                    bits_level=128
-                else:
-                    print("Cannot find security level for {:s} {:s}".format(famsig['family'], sig['name']))
-                    exit(1)
-            sig['security'] = bits_level
+#    for famsig in config['sigs']:
+#       for sig in famsig['variants']:
+#          if not "security" in sig.keys():
+#             bits_level = nist_to_bits(get_sig_nistlevel(famsig, sig, oqsdocsdir))
+#             if bits_level == None: 
+#                 if sig['name'].startswith("rainbowI"):
+#                     bits_level=128
+#                 else:
+#                     print("Cannot find security level for {:s} {:s}".format(famsig['family'], sig['name']))
+#                     exit(1)
+#             sig['security'] = bits_level
    return config
 

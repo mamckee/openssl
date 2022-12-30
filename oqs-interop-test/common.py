@@ -16,26 +16,14 @@ TLS1_3_VERSION=772 #0x0304
 key_exchanges = [
 ##### OQS_TEMPLATE_FRAGMENT_KEX_ALGS_START
     # post-quantum key exchanges
-    'frodo640aes','frodo640shake','frodo976aes','frodo976shake','frodo1344aes','frodo1344shake','kyber512','kyber768','kyber1024','bikel1','bikel3','kyber90s512','kyber90s768','kyber90s1024','hqc128','hqc192','hqc256',
+    'kyber512','kyber768','kyber1024','kyber90s512','kyber90s768','kyber90s1024',
     # post-quantum + classical key exchanges
-    'p256_frodo640aes','p256_frodo640shake','p384_frodo976aes','p384_frodo976shake','p521_frodo1344aes','p521_frodo1344shake','p256_kyber512','p384_kyber768','p521_kyber1024','p256_bikel1','p384_bikel3','p256_kyber90s512','p384_kyber90s768','p521_kyber90s1024','p256_hqc128','p384_hqc192','p521_hqc256',
+    'p256_kyber512','p384_kyber768','p521_kyber1024','p256_kyber90s512','p384_kyber90s768','p521_kyber90s1024',
 ##### OQS_TEMPLATE_FRAGMENT_KEX_ALGS_END
 ]
 
 signatures = [
-##### OQS_TEMPLATE_FRAGMENT_PQ_SIG_ALGS_START
-    'dilithium2',
-    'dilithium3',
-    'dilithium5',
-    'dilithium2_aes',
-    'dilithium3_aes',
-    'dilithium5_aes',
-    'falcon512',
-    'falcon1024',
-    'sphincsharaka128frobust',
-    'sphincssha256128frobust',
-    'sphincsshake256128frobust',
-##### OQS_TEMPLATE_FRAGMENT_PQ_SIG_ALGS_END
+##### OQS_TEMPLATE_FRAGMENT_PQ_SIG_ALGS_START##### OQS_TEMPLATE_FRAGMENT_PQ_SIG_ALGS_END
 ]
 
 def run_subprocess(command, working_dir='.', expected_returncode=0, input=None):

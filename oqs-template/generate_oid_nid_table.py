@@ -161,4 +161,4 @@ else:
 config = generatehelpers.complete_config(config, oqsdocsdir)
 
 gen_kem_table(oqsdocsdir)
-gen_sig_table(oqsdocsdir)
+# gen_sig_table(oqsdocsdir)
