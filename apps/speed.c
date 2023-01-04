@@ -1233,7 +1233,6 @@ static int EdDSA_sign_loop(void *args)
     int ret, count;
 
     for (count = 0; COND(eddsa_c[testnum][0]); count++) {
-
         ret = EVP_DigestSign(edctx[testnum], eddsasig, eddsasigsize, buf, 20);
         if (ret == 0) {
             BIO_printf(bio_err, "EdDSA sign failure\n");

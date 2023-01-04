@@ -7,8 +7,6 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include <oqs/oqs.h>
-
 /*
  * This table MUST be kept in ascending order of the NID each method
  * represents (corresponding to the pkey_id field) as OBJ_bsearch

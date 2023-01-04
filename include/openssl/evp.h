@@ -68,9 +68,7 @@
 #define IS_OQS_OPENSSL_KEM_NID(a) ((a >= 0x01FF) && (a <= NID_p521_kyber90s1024))
 /////// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_END
 const char *OQSKEM_options(void);
-const char *OQSSIG_options(void);
 int oqs_size(const EVP_PKEY *pkey);
-int* get_oqssl_sig_nids(void);
 int* get_oqssl_kem_nids(void);
 char* get_oqs_alg_name(int openssl_nid);
 

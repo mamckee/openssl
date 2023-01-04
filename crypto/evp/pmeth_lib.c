@@ -13,7 +13,6 @@
 #include <openssl/engine.h>
 #include <openssl/evp.h>
 #include <openssl/x509v3.h>
-#include <oqs/oqs.h>
 #include "crypto/asn1.h"
 #include "crypto/evp.h"
 #include "internal/numbers.h"
