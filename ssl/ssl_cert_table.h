@@ -7,8 +7,6 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include <oqs/oqs.h>
-
 /*
  * Certificate table information. NB: table entries must match SSL_PKEY indices
  */
@@ -21,5 +19,5 @@ static const SSL_CERT_LOOKUP ssl_cert_info [] = {
     {NID_id_GostR3410_2012_256, SSL_aGOST12}, /* SSL_PKEY_GOST12_256 */
     {NID_id_GostR3410_2012_512, SSL_aGOST12}, /* SSL_PKEY_GOST12_512 */
     {EVP_PKEY_ED25519, SSL_aECDSA}, /* SSL_PKEY_ED25519 */
-    {EVP_PKEY_ED448, SSL_aECDSA}, /* SSL_PKEY_ED448 */
+    {EVP_PKEY_ED448, SSL_aECDSA} /* SSL_PKEY_ED448 */
 };

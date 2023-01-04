@@ -8,7 +8,6 @@
  */
 
 #include <openssl/evp.h>
-#include <oqs/oqs.h>
 #include "internal/refcount.h"
 
 /*

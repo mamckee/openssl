@@ -233,22 +233,22 @@ static const char *get_sigtype(int nid)
     case EVP_PKEY_DSA:
         return "DSA";
 
-    case EVP_PKEY_EC:
+     case EVP_PKEY_EC:
         return "ECDSA";
 
-    case NID_ED25519:
+     case NID_ED25519:
         return "Ed25519";
 
-    case NID_ED448:
+     case NID_ED448:
         return "Ed448";
 
-    case NID_id_GostR3410_2001:
+     case NID_id_GostR3410_2001:
         return "gost2001";
 
-    case NID_id_GostR3410_2012_256:
+     case NID_id_GostR3410_2012_256:
         return "gost2012_256";
 
-    case NID_id_GostR3410_2012_512:
+     case NID_id_GostR3410_2012_512:
         return "gost2012_512";
 
     default:
@@ -462,10 +462,8 @@ int ssl_print_tmp_key(BIO *out, SSL *s)
     break;
 #endif
     default:
-      {
-	  BIO_printf(out, "%s, %d bits\n", OBJ_nid2sn(EVP_PKEY_id(key)),
-                      EVP_PKEY_bits(key));
-      }
+        BIO_printf(out, "%s, %d bits\n", OBJ_nid2sn(EVP_PKEY_id(key)),
+                   EVP_PKEY_bits(key));
     }
     EVP_PKEY_free(key);
     return 1;

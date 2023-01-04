@@ -9,8 +9,6 @@
 
 /* Internal ASN1 structures and functions: not for application use */
 
-#include <oqs/oqs.h>
-
 /* ASN1 public key method structure */
 
 struct evp_pkey_asn1_method_st {

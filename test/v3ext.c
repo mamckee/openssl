@@ -16,7 +16,6 @@
 #include "internal/nelem.h"
 
 #include "testutil.h"
-#include <string.h>
 
 static const char *infile;
 

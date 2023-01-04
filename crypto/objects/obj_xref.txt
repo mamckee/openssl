@@ -24,7 +24,6 @@ rsassaPss		undef	rsaEncryption
 ED25519		    undef	ED25519
 ED448		    undef	ED448
 
-
 # Alternative deprecated OIDs. By using the older "rsa" OID this
 # type will be recognized by not normally used.
 

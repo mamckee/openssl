@@ -34,7 +34,7 @@
 # include "internal/dane.h"
 # include "internal/refcount.h"
 # include "internal/tsan_assist.h"
-#include <oqs/oqs.h>
+# include <oqs/oqs.h>
 
 # ifdef OPENSSL_BUILD_SHLIBSSL
 #  undef OPENSSL_EXTERN
@@ -206,8 +206,7 @@
 # define SSL_aANY                0x00000000U
 /* All bits requiring a certificate */
 #define SSL_aCERT \
-  (SSL_aRSA | SSL_aDSS | SSL_aECDSA | SSL_aGOST01 | SSL_aGOST12) /* FIXMEOQS: should I add the OQS schemes here? */
-
+    (SSL_aRSA | SSL_aDSS | SSL_aECDSA | SSL_aGOST01 | SSL_aGOST12)
 /* Bits for algorithm_enc (symmetric encryption) */
 # define SSL_DES                 0x00000001U
 # define SSL_3DES                0x00000002U
@@ -384,7 +383,7 @@
 # define SSL_PKEY_GOST12_512     6
 # define SSL_PKEY_ED25519        7
 # define SSL_PKEY_ED448          8
-# define SSL_PKEY_NUM 9
+# define SSL_PKEY_NUM            9
 
 /*-
  * SSL_kRSA <- RSA_ENC
@@ -511,7 +510,7 @@ struct ssl_cipher_st {
      * 'algorithms'
      */
     uint32_t algorithm_mkey;    /* key exchange algorithm */
-    uint64_t algorithm_auth;    /* server authentication */
+    uint32_t algorithm_auth;    /* server authentication */
     uint32_t algorithm_enc;     /* symmetric encryption */
     uint32_t algorithm_mac;     /* symmetric authentication */
     int min_tls;                /* minimum SSL/TLS protocol version */
@@ -1614,7 +1613,7 @@ typedef struct cert_pkey_st CERT_PKEY;
  */
 typedef struct {
     int nid; /* NID of public key algorithm */
-    uint64_t amask; /* authmask corresponding to key type */
+    uint32_t amask; /* authmask corresponding to key type */
 } SSL_CERT_LOOKUP;
 
 typedef struct ssl3_state_st {
