@@ -1159,7 +1159,6 @@ size_t ossl_statem_server_max_message_size(SSL *s)
 
     case TLS_ST_SR_CERT_VRFY:
         return SSL3_RT_MAX_PLAIN_LENGTH;
-        
 
 #ifndef OPENSSL_NO_NEXTPROTONEG
     case TLS_ST_SR_NEXT_PROTO:

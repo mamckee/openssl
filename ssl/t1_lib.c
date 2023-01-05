@@ -281,7 +281,6 @@ const TLS_GROUP_INFO *tls1_group_id_lookup(uint16_t group_id)
                           OSSL_NELEM(oqs_nid_list) + \
                           OSSL_NELEM(oqs_hybrid_nid_list))
 
-
 static uint16_t tls1_nid2group_id(int nid)
 {
     size_t i;
@@ -914,7 +913,7 @@ static const SIGALG_LOOKUP sigalg_lookup_tbl[] = {
     {NULL, TLSEXT_SIGALG_gostr34102001_gostr3411,
      NID_id_GostR3411_94, SSL_MD_GOST94_IDX,
      NID_id_GostR3410_2001, SSL_PKEY_GOST01,
-     NID_undef, NID_undef},
+     NID_undef, NID_undef}
 #endif
 };
 /* Legacy sigalgs for TLS < 1.2 RSA TLS signatures */

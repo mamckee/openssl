@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "*.w": "cpp",
+        "x509.h": "c",
+        "rsa.h": "c",
+        "stdio.h": "c",
+        "err.h": "c",
+        "oqs.h": "c",
+        "ssl_cert_table.h": "c",
+        "functional": "c",
+        "cryptlib.h": "c",
+        "cms.h": "c"
+    },
+    "C_Cpp.default.includePath": [
+        "./include",
+        "${default}",
+        "./oqs/include"
+    ]
+}
