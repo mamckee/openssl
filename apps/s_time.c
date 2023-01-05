@@ -219,7 +219,6 @@ int s_time_main(int argc, char **argv)
         ERR_print_errors(bio_err);
         goto end;
     }
-
     if (!(perform & 1))
         goto next;
     printf("Collecting connection statistics for %d seconds\n", maxtime);
