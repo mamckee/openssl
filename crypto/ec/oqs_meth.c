@@ -33,9 +33,6 @@ int oqssl_kem_nids_list[] = {
         NID_kyber512,
         NID_kyber768,
         NID_kyber1024,
-        NID_kyber90s512,
-        NID_kyber90s768,
-        NID_kyber90s1024,
 /////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_END
 };
 
@@ -66,15 +63,6 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_kyber1024:
     case NID_p521_kyber1024:
       return OQS_KEM_alg_kyber_1024;
-    case NID_kyber90s512:
-    case NID_p256_kyber90s512:
-      return OQS_KEM_alg_kyber_512_90s;
-    case NID_kyber90s768:
-    case NID_p384_kyber90s768:
-      return OQS_KEM_alg_kyber_768_90s;
-    case NID_kyber90s1024:
-    case NID_p521_kyber90s1024:
-      return OQS_KEM_alg_kyber_1024_90s;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_END
     default:
       return NULL;

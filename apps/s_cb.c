@@ -406,17 +406,11 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
   case 0x023A: return "kyber512";
   case 0x023C: return "kyber768";
   case 0x023D: return "kyber1024";
-  case 0x023E: return "kyber90s512";
-  case 0x023F: return "kyber90s768";
-  case 0x0240: return "kyber90s1024";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_START
    case 0x2F3A: return "p256_kyber512 hybrid";
    case 0x2F3C: return "p384_kyber768 hybrid";
    case 0x2F3D: return "p521_kyber1024 hybrid";
-   case 0x2F3E: return "p256_kyber90s512 hybrid";
-   case 0x2F3F: return "p384_kyber90s768 hybrid";
-   case 0x2F40: return "p521_kyber90s1024 hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_END
   default: return "";
   }

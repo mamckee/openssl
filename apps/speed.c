@@ -3578,16 +3578,26 @@ static void pkey_print_message(const char *str, const char *str2, long num,
                                unsigned int bits, int tm)
 {
 #ifdef SIGALRM
-    BIO_printf(bio_err,
+    if (bits)
+        BIO_printf(bio_err,
                mr ? "+DTP:%d:%s:%s:%d\n"
-               : "Doing %u bits %s %s's for %ds: ", bits, str, str2, tm);
+               : "Doing %u bits %s %s's for %ds: ", bits, str, str2, tm );
+    else
+        BIO_printf(bio_err,
+               mr ? "+DTP:%s:%s:%d\n"
+               : "Doing %s %s's for %ds: ", str, str2, tm );
     (void)BIO_flush(bio_err);
     run = 1;
     alarm(tm);
 #else
-    BIO_printf(bio_err,
+    if (bits) 
+       BIO_printf(bio_err,
                mr ? "+DNP:%ld:%d:%s:%s\n"
-               : "Doing %ld %u bits %s %s's: ", num, bits, str, str2);
+               : "Doing %ld %s %s's: ", num, str, str2);
+    else 
+       BIO_printf(bio_err,
+               mr ? "+DNP:%ld:%d:%s:%s\n"
+               : "Doing %ld %s %s's: ", num, str, str2);
     (void)BIO_flush(bio_err);
 #endif
 }

@@ -406,11 +406,8 @@
   (nid == NID_kyber512 ? 0x023A : \
   (nid == NID_kyber768 ? 0x023C : \
   (nid == NID_kyber1024 ? 0x023D : \
-  (nid == NID_kyber90s512 ? 0x023E : \
-  (nid == NID_kyber90s768 ? 0x023F : \
-  (nid == NID_kyber90s1024 ? 0x0240 : \
   0 \
-  ))))))
+  )))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_CURVEID_END
 
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_HYBRID_CURVEID_START
@@ -418,11 +415,8 @@
     (nid == NID_p256_kyber512 ? 0x2F3A : \
     (nid == NID_p384_kyber768 ? 0x2F3C : \
     (nid == NID_p521_kyber1024 ? 0x2F3D : \
-    (nid == NID_p256_kyber90s512 ? 0x2F3E : \
-    (nid == NID_p384_kyber90s768 ? 0x2F3F : \
-    (nid == NID_p521_kyber90s1024 ? 0x2F40 : \
   0 \
-  ))))))
+  )))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_HYBRID_CURVEID_END
 
   /* Returns the non-hybrid OQS KEM NID for a PQ or hybrid curve ID */
@@ -431,11 +425,8 @@
   (curveID == 0x023A || curveID == 0x2F3A ? NID_kyber512 : \
   (curveID == 0x023C || curveID == 0x2F3C ? NID_kyber768 : \
   (curveID == 0x023D || curveID == 0x2F3D ? NID_kyber1024 : \
-  (curveID == 0x023E || curveID == 0x2F3E ? NID_kyber90s512 : \
-  (curveID == 0x023F || curveID == 0x2F3F ? NID_kyber90s768 : \
-  (curveID == 0x0240 || curveID == 0x2F40 ? NID_kyber90s1024 : \
   0 \
-  ))))))
+  )))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_NID_END
 
   /* Returns the hybrid OQS KEM NID for a hybrid curve ID */
@@ -444,11 +435,8 @@
     (curveID == 0x2F3A ? NID_p256_kyber512 : \
     (curveID == 0x2F3C ? NID_p384_kyber768 : \
     (curveID == 0x2F3D ? NID_p521_kyber1024 : \
-    (curveID == 0x2F3E ? NID_p256_kyber90s512 : \
-    (curveID == 0x2F3F ? NID_p384_kyber90s768 : \
-    (curveID == 0x2F40 ? NID_p521_kyber90s1024 : \
   0 \
-  ))))))
+  )))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_HYBRID_KEM_NID_END
 
 /* Returns true if the curve ID is for an OQS KEM */
@@ -465,11 +453,8 @@
   (nid == NID_kyber512 ? OQS_KEM_alg_kyber_512 : \
   (nid == NID_kyber768 ? OQS_KEM_alg_kyber_768 : \
   (nid == NID_kyber1024 ? OQS_KEM_alg_kyber_1024 : \
-  (nid == NID_kyber90s512 ? OQS_KEM_alg_kyber_512_90s : \
-  (nid == NID_kyber90s768 ? OQS_KEM_alg_kyber_768_90s : \
-  (nid == NID_kyber90s1024 ? OQS_KEM_alg_kyber_1024_90s : \
   0 \
-  ))))))
+  )))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_ALG_NAME_END
 
 /* Returns the classic curve ID for a given hybrid curve */
@@ -479,11 +464,8 @@
   (cid == 0x2F3A ?23: \
   (cid == 0x2F3C ?24: \
   (cid == 0x2F3D ?25: \
-  (cid == 0x2F3E ?23: \
-  (cid == 0x2F3F ?24: \
-  (cid == 0x2F40 ?25: \
   23 \
-  )))))))
+  ))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_MAP_HYBRID_END
 
 /* Returns the classical nid for an hybrid alg */

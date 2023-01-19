@@ -5,7 +5,7 @@ OQS-OpenSSL\_1\_1\_1
 
 [OpenSSL](https://openssl.org/) is an open-source implementation of the TLS protocol and various cryptographic algorithms ([View the original README](https://github.com/open-quantum-safe/openssl/blob/OQS-OpenSSL_1_1_1-stable/README).)
 
-OQS-OpenSSL\_1\_1\_1 is a fork of OpenSSL 1.1.1 that adds quantum-safe key exchange and authentication algorithms using [liboqs](https://github.com/open-quantum-safe/liboqs) for prototyping and evaluation purposes. This fork is not endorsed by the OpenSSL project.
+OQS-OpenSSL\_1\_1\_1 is a fork of OpenSSL 1.1.1 that adds quantum-safe key exchange using [liboqs](https://github.com/open-quantum-safe/liboqs) for prototyping and evaluation purposes (currently only supporting the kyber algorithm). This fork is not endorsed by the OpenSSL project.
 
 - [Overview](#overview)
 - [Status](#status)
@@ -43,9 +43,6 @@ This fork is currently in sync with the [OpenSSL\_1\_1\_1s tag](https://github.c
 
 - quantum-safe key exchange in TLS 1.3
 - hybrid (quantum-safe + elliptic curve) key exchange in TLS 1.3
-- quantum-safe authentication in TLS 1.3
-- hybrid (quantum-safe + RSA/elliptic curve) authentication in TLS 1.3
-- CMS support (sign and verify using any of the [supported quantum-safe signature algorithms](#authentication))
 
 For more information, see the [release notes](RELEASE.md).
 
@@ -87,22 +84,6 @@ If ``<KEX>`` is any of the algorithms listed above, the following hybrid algorit
 For example, since `kyber768` [claims NIST L3 security](https://github.com/open-quantum-safe/liboqs/blob/main/docs/algorithms/kem/kyber.md), the hybrid `p384_kyber768` is available.
 
 Note that algorithms marked with a dagger (†) have large stack usage and may cause failures when run on threads or in constrained environments. For further information about each algorithm's strengths and limitations, see the [documentation markdown files at liboqs](https://github.com/open-quantum-safe/liboqs/tree/main/docs/algorithms/kem).
-
-#### Authentication
-
-The following digital signature algorithms from liboqs are supported by the fork. **Note that not all variants of all algorithms are enabled by default; algorithms that are enabled by default are marked with an asterisk, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssl/wiki/Using-liboqs-algorithms-not-in-the-fork#code-generation)**.
-
-<!--- OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START --><!--- OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END -->
-
-The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with a traditional digital signature algorithm (`<SIG>` is any one of the algorithms listed above):
-
-- if `<SIG>` claims NIST L1 or L2 security, then the fork provides the methods `rsa3072_<SIG>` and `p256_<SIG>`, which combine `<SIG>` with RSA3072 and with ECDSA using NIST's P256 curve respectively.
-- if `<SIG>` claims NIST L3 or L4 security, the fork provides the method `p384_<SIG>`, which combines `<SIG>` with ECDSA using NIST's P384 curve.
-- if `<SIG>` claims NIST L5 security, the fork provides the method `p521_<SIG>`, which combines `<SIG>` with ECDSA using NIST's P521 curve.
-
-For example, since `dilithium2` [claims NIST L2 security](https://github.com/open-quantum-safe/liboqs/blob/main/docs/algorithms/sig/dilithium.md), the hybrids `rsa3072_dilithium2` and `p256_dilithium2` are available.
-
-For further information about each algorithm's strengths and limitations, see the [documentation markdown files at liboqs](https://github.com/open-quantum-safe/liboqs/tree/main/docs/algorithms/sig).
 
 ## Quickstart
 
@@ -210,7 +191,7 @@ The announced algorithms can also be modified at runtime by setting the `-curves
 
 OpenSSL contains a basic TLS server (`s_server`) and TLS client (`s_client`) which can be used to demonstrate and test TLS connections.
 
-To run a server, you first need to generate an X.509 certificate, using either a classical (`rsa`), quantum-safe (any quantum-safe authentication algorithm in the [Supported Algorithms](#supported-algorithms) section above), or hybrid (any hybrid authentication algorithm in the [Supported Algorithms](#supported-algorithms) section above) algorithm. The server certificate can either be self-signed or part of a chain. In either case, you need to generate a self-signed root CA certificate using the following command, replacing `<SIG>` with an algorithm mentioned above:
+To run a server, you first need to generate an X.509 certificate. The server certificate can either be self-signed or part of a chain. In either case, you need to generate a self-signed root CA certificate using the following command, replacing `<SIG>` with the desired algorithm (e.g., `rsa`):
 
 	apps/openssl req -x509 -new -newkey <SIG> -keyout <SIG>_CA.key -out <SIG>_CA.crt -nodes -subj "/CN=oqstest CA" -days 365 -config apps/openssl.cnf
 
@@ -235,24 +216,6 @@ Using the key and certificate thus created, running a basic TLS server with all 
 In another terminal window, you can run a TLS client requesting one of the supported key-exchanges (`<KEX>` = one of the quantum-safe or hybrid key exchange algorithms listed in the [Supported Algorithms section above](#key-exchange):
 
 	apps/openssl s_client -groups <KEX> -CAfile <SIG>_CA.crt
-
-#### CMS demo
-
-OpenSSL has facilities to perform signing operations pursuant to [RFC 5652](https://datatracker.ietf.org/doc/rfc5652). This fork can be used to perform such operations with quantum-safe algorithms.
-
-Building on the artifacts created in the TLS setup above (CA and server certificate creation using a specific (quantum-safe) `<SIG>` algorithm), the following command can be used to generate a (quantum-safe) signed file from some input file:
-
-	apps/openssl cms -in inputfile -sign -signer <SIG>_srv.crt -inkey <SIG>_srv.key -nodetach -outform pem -binary -out signedfile.cms 
-
-This command can be used to verify (and extract the contents) of the CMS file resultant from the command above:
-
-	apps/openssl cms -verify -CAfile <SIG>_CA.crt -inform pem -in signedfile.cms -crlfeol -out signeddatafile
-
-The contents of `inputfile` and the resultant `signeddatafile` should be the same.
-
-Also supported are general signing operations using the standard [OpenSSL dgst](https://www.openssl.org/docs/man1.1.1/man1/dgst.html) commands using QSC public/private keys of [any of the supported signature algorithms](#authentication). Example command using the same file notation used above:
-
-        echo TestDataToSign | apps/openssl dgst -sha256 -sign <SIG>_srv.key -out signature
 
 #### Performance testing
 
@@ -284,17 +247,13 @@ To measure the speed of all KEM algorithms supported by the underlying `liboqs`:
 
 	apps/openssl speed oqskem
 
-Similarly, to measure the speed of all OQS signature algorithms:
-
-	apps/openssl speed oqssig
-
-As with standard OpenSSL, one can also pass a particular algorithm name to be tested, e.g., `apps/openssl speed dilithium2`.
+As with standard OpenSSL, one can also pass a particular algorithm name to be tested, e.g., `apps/openssl speed kyber512`.
 
 We also have [docker-based performance test environments in the `oqs-demos` subproject](https://github.com/open-quantum-safe/oqs-demos/tree/master/curl#performance-testing).
 
 #### Integration testing
 
-We have various `pytest` test suites for the TLS and CMS functionalities. Consult the [oqs-test/ README](https://github.com/open-quantum-safe/openssl/blob/OQS-OpenSSL_1_1_1-stable/oqs-test/README.md) for more information.
+We have various `pytest` test suites for the TLS functionality. Consult the [oqs-test/ README](https://github.com/open-quantum-safe/openssl/blob/OQS-OpenSSL_1_1_1-stable/oqs-test/README.md) for more information.
 
 ## Third Party Integrations
 

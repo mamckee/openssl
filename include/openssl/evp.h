@@ -64,8 +64,8 @@
 # define EVP_PKEY_X448 NID_X448
 # define EVP_PKEY_ED448 NID_ED448
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_START
-#define OQS_OPENSSL_KEM_algs_length 6
-#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= 0x01FF) && (a <= NID_p521_kyber90s1024))
+#define OQS_OPENSSL_KEM_algs_length 3
+#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= 0x01FF) && (a <= NID_p521_kyber1024))
 /////// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_END
 const char *OQSKEM_options(void);
 int* get_oqssl_kem_nids(void);

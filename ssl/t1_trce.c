@@ -534,17 +534,11 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
     {OQS_KEM_CURVEID(NID_kyber512), "kyber512"},
     {OQS_KEM_CURVEID(NID_kyber768), "kyber768"},
     {OQS_KEM_CURVEID(NID_kyber1024), "kyber1024"},
-    {OQS_KEM_CURVEID(NID_kyber90s512), "kyber90s512"},
-    {OQS_KEM_CURVEID(NID_kyber90s768), "kyber90s768"},
-    {OQS_KEM_CURVEID(NID_kyber90s1024), "kyber90s1024"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_END
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_START
     {OQS_KEM_CURVEID(NID_p256_kyber512), "p256 - kyber512 hybrid"},
     {OQS_KEM_CURVEID(NID_p384_kyber768), "p384 - kyber768 hybrid"},
     {OQS_KEM_CURVEID(NID_p521_kyber1024), "p521 - kyber1024 hybrid"},
-    {OQS_KEM_CURVEID(NID_p256_kyber90s512), "p256 - kyber90s512 hybrid"},
-    {OQS_KEM_CURVEID(NID_p384_kyber90s768), "p384 - kyber90s768 hybrid"},
-    {OQS_KEM_CURVEID(NID_p521_kyber90s1024), "p521 - kyber90s1024 hybrid"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_END
     {0xFF01, "arbitrary_explicit_prime_curves"},
     {0xFF02, "arbitrary_explicit_char2_curves"}

@@ -1078,7 +1078,7 @@ static const unsigned char so[7762] = {
     0x2A,0x86,0x48,0x86,0xF7,0x0D,0x02,0x0D,       /* [ 7753] OBJ_hmacWithSHA512_256 */
 };
 
-#define NUM_NID 1209
+#define NUM_NID 1203
 static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"UNDEF", "undefined", NID_undef},
     {"rsadsi", "RSA Data Security, Inc.", NID_rsadsi, 6, &so[0]},
@@ -2279,19 +2279,13 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"kyber512", "kyber512", NID_kyber512},
     {"kyber768", "kyber768", NID_kyber768},
     {"kyber1024", "kyber1024", NID_kyber1024},
-    {"kyber90s512", "kyber90s512", NID_kyber90s512},
-    {"kyber90s768", "kyber90s768", NID_kyber90s768},
-    {"kyber90s1024", "kyber90s1024", NID_kyber90s1024},
     { NULL, NULL, NID_undef },
     {"p256_kyber512", "p256_kyber512", NID_p256_kyber512},
     {"p384_kyber768", "p384_kyber768", NID_p384_kyber768},
     {"p521_kyber1024", "p521_kyber1024", NID_p521_kyber1024},
-    {"p256_kyber90s512", "p256_kyber90s512", NID_p256_kyber90s512},
-    {"p384_kyber90s768", "p384_kyber90s768", NID_p384_kyber90s768},
-    {"p521_kyber90s1024", "p521_kyber90s1024", NID_p521_kyber90s1024},
 };
 
-#define NUM_SN 1198
+#define NUM_SN 1192
 static const unsigned int sn_objs[NUM_SN] = {
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
@@ -3112,9 +3106,6 @@ static const unsigned int sn_objs[NUM_SN] = {
     1198,    /* "kyber1024" */
     1196,    /* "kyber512" */
     1197,    /* "kyber768" */
-    1201,    /* "kyber90s1024" */
-    1199,    /* "kyber90s512" */
-    1200,    /* "kyber90s768" */
      477,    /* "lastModifiedBy" */
      476,    /* "lastModifiedTime" */
      157,    /* "localKeyID" */
@@ -3171,12 +3162,9 @@ static const unsigned int sn_objs[NUM_SN] = {
     1141,    /* "oscca" */
      475,    /* "otherMailbox" */
      876,    /* "owner" */
-    1203,    /* "p256_kyber512" */
-    1206,    /* "p256_kyber90s512" */
-    1204,    /* "p384_kyber768" */
-    1207,    /* "p384_kyber90s768" */
-    1205,    /* "p521_kyber1024" */
-    1208,    /* "p521_kyber90s1024" */
+    1200,    /* "p256_kyber512" */
+    1201,    /* "p384_kyber768" */
+    1202,    /* "p521_kyber1024" */
      489,    /* "pagerTelephoneNumber" */
      374,    /* "path" */
      112,    /* "pbeWithMD5AndCast5CBC" */
@@ -3493,7 +3481,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1093,    /* "x509ExtAdmission" */
 };
 
-#define NUM_LN 1198
+#define NUM_LN 1192
 static const unsigned int ln_objs[NUM_LN] = {
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
@@ -4301,9 +4289,6 @@ static const unsigned int ln_objs[NUM_LN] = {
     1198,    /* "kyber1024" */
     1196,    /* "kyber512" */
     1197,    /* "kyber768" */
-    1201,    /* "kyber90s1024" */
-    1199,    /* "kyber90s512" */
-    1200,    /* "kyber90s768" */
      477,    /* "lastModifiedBy" */
      476,    /* "lastModifiedTime" */
      157,    /* "localKeyID" */
@@ -4346,12 +4331,9 @@ static const unsigned int ln_objs[NUM_LN] = {
     1141,    /* "oscca" */
      475,    /* "otherMailbox" */
      876,    /* "owner" */
-    1203,    /* "p256_kyber512" */
-    1206,    /* "p256_kyber90s512" */
-    1204,    /* "p384_kyber768" */
-    1207,    /* "p384_kyber90s768" */
-    1205,    /* "p521_kyber1024" */
-    1208,    /* "p521_kyber90s1024" */
+    1200,    /* "p256_kyber512" */
+    1201,    /* "p384_kyber768" */
+    1202,    /* "p521_kyber1024" */
      935,    /* "pSpecified" */
      489,    /* "pagerTelephoneNumber" */
      782,    /* "password based MAC" */

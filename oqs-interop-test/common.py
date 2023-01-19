@@ -16,9 +16,9 @@ TLS1_3_VERSION=772 #0x0304
 key_exchanges = [
 ##### OQS_TEMPLATE_FRAGMENT_KEX_ALGS_START
     # post-quantum key exchanges
-    'kyber512','kyber768','kyber1024','kyber90s512','kyber90s768','kyber90s1024',
+    'kyber512','kyber768','kyber1024',
     # post-quantum + classical key exchanges
-    'p256_kyber512','p384_kyber768','p521_kyber1024','p256_kyber90s512','p384_kyber90s768','p521_kyber90s1024',
+    'p256_kyber512','p384_kyber768','p521_kyber1024',
 ##### OQS_TEMPLATE_FRAGMENT_KEX_ALGS_END
 ]
 
