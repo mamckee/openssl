@@ -719,8 +719,7 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
             continue;
         }
 
-        /* check if we are dealing with pqc or hybrid */
-        do_pqc = IS_OQS_KEM_CURVEID(group_id);
+        /* check if we are dealing with pqc hybrid */
         do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(group_id);
 
         /* parse the encoded_pt, which is either a classical, PQC, or hybrid (both) message. */
@@ -735,15 +734,12 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
             has_error = 1;
             goto oqs_cleanup;
           }
-        } else if (do_pqc) {
-          oqs_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
-          oqs_encodedlen = PACKET_remaining(&encoded_pt);
         } else {
           classical_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
           classical_encodedlen = PACKET_remaining(&encoded_pt);
         }
 
-        if (do_pqc || do_hybrid) {
+        if (do_hybrid) {
           const unsigned char* peer_msg = oqs_encoded_pt;
           s->s3->tmp.oqs_peer_msg_len = oqs_encodedlen;
           unsigned char* peer_key = OPENSSL_malloc(s->s3->tmp.oqs_peer_msg_len);
@@ -761,8 +757,7 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
             goto oqs_cleanup;
           }
           /* ---------- end oqs note */
-        }
-        if (!do_pqc) {
+        } else {
           /* get the curve_id for the classical alg */
           int classical_group_id = do_hybrid ? OQS_KEM_CLASSICAL_CURVEID(group_id) : group_id;
           if ((s->s3->peer_tmp = ssl_generate_param_group(classical_group_id)) == NULL) {
@@ -1760,7 +1755,6 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
     unsigned char* shared_secret = NULL, *oqs_shared_secret = NULL;
     size_t shared_secret_len = 0, oqs_shared_secret_len = 0;
     EVP_PKEY *ckey = s->s3->peer_tmp, *skey = NULL;
-    int do_pqc = 0; /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = 0; /* 1 if post-quantum hybrid alg, 0 otherwise */
 
     if (s->hello_retry_request == SSL_HRR_PENDING) {
@@ -1806,37 +1800,33 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
         return EXT_RETURN_FAIL;
     }
 
-    do_pqc = IS_OQS_KEM_CURVEID(s->s3->group_id);
     do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(s->s3->group_id);
-    if (!do_pqc || do_hybrid) {
-      skey = ssl_generate_pkey(ckey);
-      if (skey == NULL) {
+    skey = ssl_generate_pkey(ckey);
+    if (skey == NULL) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_CONSTRUCT_STOC_KEY_SHARE,
                  ERR_R_MALLOC_FAILURE);
         return EXT_RETURN_FAIL;
-      }
+    }
 
-      /* Generate encoding of server key */
-      classical_encoded_pt_len = EVP_PKEY_get1_tls_encodedpoint(skey, &classical_encodedPoint);
-      if (classical_encoded_pt_len == 0) {
+    /* Generate encoding of server key */
+    classical_encoded_pt_len = EVP_PKEY_get1_tls_encodedpoint(skey, &classical_encodedPoint);
+    if (classical_encoded_pt_len == 0) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_CONSTRUCT_STOC_KEY_SHARE,
                  ERR_R_EC_LIB);
         EVP_PKEY_free(skey);
         return EXT_RETURN_FAIL;
-      }
-
-      /* this code has been moved up from the bottom of the function, because
-         oqs code below needs it in case of hybrid */
-      /* OQS note: only derive the secret if we don't do hybrid. In case of hybrid, the 
-         shared key will be store in s->s3->tmp.pms */
-      if (ssl_derive(s, skey, ckey, do_hybrid ? 0 : 1) == 0) {
-        /* SSLfatal() already called */
-        return EXT_RETURN_FAIL;
-      }
-
     }
 
-    if (do_pqc || do_hybrid) {
+    /* this code has been moved up from the bottom of the function, because
+        oqs code below needs it in case of hybrid */
+    /* OQS note: only derive the secret if we don't do hybrid. In case of hybrid, the
+        shared key will be store in s->s3->tmp.pms */
+    if (ssl_derive(s, skey, ckey, do_hybrid ? 0 : 1) == 0) {
+        /* SSLfatal() already called */
+        return EXT_RETURN_FAIL;
+    }
+
+    if (do_hybrid) {
       /* This is a group handled by OQS */
       int oqs_nid = OQS_KEM_NID(s->s3->group_id);
       OQS_KEM* oqs_kem = NULL;
@@ -1916,9 +1906,6 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
       if (!ret) {
         return EXT_RETURN_FAIL;
       }
-    } else if (do_pqc) {
-      encodedPoint = oqs_encodedPoint;
-      encoded_pt_len = oqs_encoded_pt_len;
     } else {
       encodedPoint = classical_encodedPoint;
       encoded_pt_len = classical_encoded_pt_len;
