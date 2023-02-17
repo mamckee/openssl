@@ -1573,7 +1573,12 @@ int speed_main(int argc, char **argv)
 
     /* populate oqskem_choices */
     int oqskemcnt = 0;
-    int* oqssl_kem_nids_list = get_oqssl_kem_nids(); 
+    int* oqssl_kem_nids_list = get_oqssl_kem_nids();
+    if (oqssl_kem_nids_list == NULL) {
+        BIO_printf(bio_err, "Failed to get oqssl_kem_nids_list\n");
+        goto end;
+    }
+
     for (oqskemcnt = 0; oqskemcnt < OQSKEM_NUM; ++oqskemcnt) {
         oqskem_choices[oqskemcnt].name = OBJ_nid2sn(oqssl_kem_nids_list[oqskemcnt]);
         oqskem_choices[oqskemcnt].retval = oqskemcnt;

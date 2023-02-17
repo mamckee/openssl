@@ -41,7 +41,8 @@ static int* kem_nid_list = NULL;
 int* get_oqssl_kem_nids() {
    if (!kem_nid_list) {
       kem_nid_list = OPENSSL_malloc(sizeof(oqssl_kem_nids_list));
-      memcpy(kem_nid_list, oqssl_kem_nids_list, sizeof(oqssl_kem_nids_list));
+      if (kem_nid_list != NULL)
+        memcpy(kem_nid_list, oqssl_kem_nids_list, sizeof(oqssl_kem_nids_list));
    }
    return kem_nid_list;
 }
@@ -78,13 +79,23 @@ const char *OQSKEM_options(void)
 // TODO: Revisit which OQS_COMPILE_FLAGS to show
 #ifdef OQS_COMPILE_CFLAGS
     const char* OQSKEMALGS = "OQS KEM build : ";
-    char* result =  OPENSSL_zalloc(strlen(OQS_COMPILE_CFLAGS)+OQS_OPENSSL_KEM_algs_length*40); // OK, a bit pessimistic but this will be removed very soon...
+    char* result =  OPENSSL_zalloc(strlen(OQSKEMALGS)+strlen(OQS_COMPILE_CFLAGS)+OQS_OPENSSL_KEM_algs_length*40+2); // OK, a bit pessimistic but this will be removed very soon...
+    if (result == NULL)
+    {
+      return "";
+    }
+
     memcpy(result, OQSKEMALGS, offset = strlen(OQSKEMALGS));
     memcpy(result+offset, OQS_COMPILE_CFLAGS, strlen(OQS_COMPILE_CFLAGS));
     offset += strlen(OQS_COMPILE_CFLAGS);
 #else
     const char* OQSKEMALGS = "";
-    char* result =  OPENSSL_zalloc(OQS_OPENSSL_KEM_algs_length*40); // OK, a bit pessimistic but this will be removed very soon...
+    char* result =  OPENSSL_zalloc(strlen(OQSKEMALGS)+OQS_OPENSSL_KEM_algs_length*40+2); // OK, a bit pessimistic but this will be removed very soon...
+    if (result == NULL)
+    {
+      return "";
+    }
+
     memcpy(result, OQSKEMALGS, offset = strlen(OQSKEMALGS));
 #endif
 
@@ -94,7 +105,7 @@ const char *OQSKEM_options(void)
        const char* name = OBJ_nid2sn(oqssl_kem_nids_list[i]);
        if (OQS_KEM_alg_is_enabled(get_oqs_alg_name(oqssl_kem_nids_list[i]))) {
            int l = strlen(name);
-           memcpy(result+offset, name, l);
+           memcpy(result+offset, name, l > 39 ? l : 39);
            if (i<OQS_OPENSSL_KEM_algs_length-1) {
               result[offset+l]=',';
               offset = offset+l+1;

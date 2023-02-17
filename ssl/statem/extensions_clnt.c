@@ -2017,6 +2017,12 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
           /* we concatenate the classical and oqs shared secret */
           shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len;
           shared_secret = OPENSSL_malloc(shared_secret_len);
+          if (shared_secret == NULL) {
+            SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_PARSE_STOC_KEY_SHARE, ERR_R_INTERNAL_ERROR);
+            has_error = 1;
+            goto oqs_cleanup;
+          }
+
           memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
           memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
         } else {

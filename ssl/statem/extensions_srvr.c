@@ -743,6 +743,13 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
           const unsigned char* peer_msg = oqs_encoded_pt;
           s->s3->tmp.oqs_peer_msg_len = oqs_encodedlen;
           unsigned char* peer_key = OPENSSL_malloc(s->s3->tmp.oqs_peer_msg_len);
+          if (peer_key == NULL) {
+            SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_PARSE_CTOS_KEY_SHARE,
+                     ERR_R_INTERNAL_ERROR);
+            has_error = 1;
+            goto oqs_cleanup;
+          }
+
           memcpy(peer_key, peer_msg, s->s3->tmp.oqs_peer_msg_len); /* FIXMEOQS: when should I free that? */
           s->s3->tmp.oqs_kem_client = peer_key;
           /* OQS note: we are not using peer_tmp in the oqs case, but the kex fails if this
@@ -1865,6 +1872,12 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
           /* we concatenate the classical and oqs shared secret */
           shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len;
           shared_secret = OPENSSL_malloc(shared_secret_len);
+          if (shared_secret == NULL) {
+            SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_CONSTRUCT_STOC_KEY_SHARE, ERR_R_INTERNAL_ERROR);
+            has_error = 1;
+            goto oqs_cleanup;
+          }
+
           memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
           memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
         } else {

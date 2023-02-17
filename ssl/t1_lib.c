@@ -510,7 +510,10 @@ static int nid_cb(const char *elem, int len, void *arg)
         nid = OBJ_sn2nid(etmp);
         if (nid != NID_undef) { // also OQS names would be found here, so test for enablement; std curves will only be found by ln2nid below
              char* oqs_name = get_oqs_alg_name(nid);
-             if (oqs_name && !OQS_KEM_alg_is_enabled(oqs_name)) fprintf(stderr, "Warning: Algorithm '%s' is not enabled in liboqs. \n", etmp);
+             if (oqs_name && !OQS_KEM_alg_is_enabled(oqs_name)) {
+                fprintf(stderr, "Warning: Algorithm '%s' is not enabled in liboqs. \n", etmp);
+                return 0;
+             }
         }
     }
     if (nid == NID_undef) {
