@@ -105,7 +105,7 @@ const char *OQSKEM_options(void)
        const char* name = OBJ_nid2sn(oqssl_kem_nids_list[i]);
        if (OQS_KEM_alg_is_enabled(get_oqs_alg_name(oqssl_kem_nids_list[i]))) {
            int l = strlen(name);
-           memcpy(result+offset, name, l > 39 ? l : 39);
+           memcpy(result+offset, name, l <= 39 ? l : 39);
            if (i<OQS_OPENSSL_KEM_algs_length-1) {
               result[offset+l]=',';
               offset = offset+l+1;
