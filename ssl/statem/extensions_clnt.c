@@ -612,6 +612,7 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
     EVP_PKEY *key_share_key = NULL;
     size_t encodedlen = 0;
     uint16_t classical_encodedlen = 0, oqs_encodedlen = 0;
+    int do_pqc = IS_OQS_KEM_CURVEID(curve_id); /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(curve_id); /* 1 if post-quantum hybrid alg, 0 otherwise */
     if (s->s3->tmp.pkey != NULL) {
         if (!ossl_assert(s->hello_retry_request == SSL_HRR_PENDING)) {
@@ -624,7 +625,7 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
          */
         key_share_key = s->s3->tmp.pkey;
     } else {
-      if (do_hybrid) {
+      if (do_pqc || do_hybrid) {
         /* This is a group handled by OQS */
         int has_error = 0;
         int oqs_nid = OQS_KEM_NID(curve_id);
@@ -657,6 +658,7 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
           return 0;
         }
       }
+      if (!do_pqc) {
         /* get the curve_id for the classical alg */
         int classical_curve_id = do_hybrid ? OQS_KEM_CLASSICAL_CURVEID(curve_id) : curve_id;
         key_share_key = ssl_generate_pkey_group(s, classical_curve_id);
@@ -664,13 +666,16 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
             /* SSLfatal() already called */
             return 0;
         }
+      }
     }
 
-    /* Encode the public key. */
-    classical_encodedlen = EVP_PKEY_get1_tls_encodedpoint(key_share_key, &classical_encoded_point);
-    if (classical_encodedlen == 0) {
-    SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_EC_LIB);
-    goto err;
+    if (!do_pqc) {
+      /* Encode the public key. */
+      classical_encodedlen = EVP_PKEY_get1_tls_encodedpoint(key_share_key, &classical_encoded_point);
+      if (classical_encodedlen == 0) {
+        SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_EC_LIB);
+        goto err;
+      }
     }
 
     if (do_hybrid) {
@@ -681,6 +686,9 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
       encodedlen = encodedlen16;
       OPENSSL_free(classical_encoded_point);
       OPENSSL_free(oqs_encoded_point);
+    } else if (do_pqc) {
+      encoded_point = oqs_encoded_point;
+      encodedlen = oqs_encodedlen;
     } else {
       encoded_point = classical_encoded_point;
       encodedlen = classical_encodedlen;
@@ -1875,6 +1883,7 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
     unsigned char *shared_secret = NULL, *oqs_shared_secret = NULL;
     size_t shared_secret_len = 0, oqs_shared_secret_len = 0;
     EVP_PKEY *ckey = s->s3->tmp.pkey, *skey = NULL;
+    int do_pqc = 0;
     int do_hybrid = 0;
     int has_error = 0;
 
@@ -1884,10 +1893,11 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
                  SSL_R_LENGTH_MISMATCH);
         return 0;
     }
+    do_pqc = IS_OQS_KEM_CURVEID(group_id); /* 1 if post-quantum alg, 0 otherwise */
     do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(group_id); /* 1 if post-quantum hybrid alg, 0 otherwise */
 
     /* Sanity check */
-    if (ckey == NULL || s->s3->peer_tmp != NULL) {
+    if ((!do_pqc || do_hybrid) && (ckey == NULL || s->s3->peer_tmp != NULL)) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_PARSE_STOC_KEY_SHARE,
                  ERR_R_INTERNAL_ERROR);
         return 0;
@@ -1959,36 +1969,40 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
         has_error = 1;
         goto oqs_cleanup;
       }
+    } else if (do_pqc) {
+      oqs_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
+      oqs_encodedlen = PACKET_remaining(&encoded_pt);
     } else {
       classical_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
       classical_encodedlen = PACKET_remaining(&encoded_pt);
     }
 
-    skey = EVP_PKEY_new();
-    if (skey == NULL || EVP_PKEY_copy_parameters(skey, ckey) <= 0) {
+    if (!do_pqc || do_hybrid) {
+      skey = EVP_PKEY_new();
+      if (skey == NULL || EVP_PKEY_copy_parameters(skey, ckey) <= 0) {
         SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_PARSE_STOC_KEY_SHARE,
-                    ERR_R_MALLOC_FAILURE);
+                 ERR_R_MALLOC_FAILURE);
         has_error = 1;
         EVP_PKEY_free(skey);
         goto oqs_cleanup;
-    }
-    if (!EVP_PKEY_set1_tls_encodedpoint(skey, classical_encoded_pt, classical_encodedlen)) {
+      }
+      if (!EVP_PKEY_set1_tls_encodedpoint(skey, classical_encoded_pt, classical_encodedlen)) {
         SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_F_TLS_PARSE_STOC_KEY_SHARE,
                  SSL_R_BAD_ECPOINT);
         EVP_PKEY_free(skey);
         has_error = 1;
         goto oqs_cleanup;
-    }
-    /* OQS note: only derive the secret if we don't do hybrid. In case of hybrid, the
-        shared key will be store in s->s3->tmp.pms */
-    if (ssl_derive(s, ckey, skey, do_hybrid ? 0 : 1) == 0) {
+      }
+      /* OQS note: only derive the secret if we don't do hybrid. In case of hybrid, the
+         shared key will be store in s->s3->tmp.pms */
+      if (ssl_derive(s, ckey, skey, do_hybrid ? 0 : 1) == 0) {
         /* SSLfatal() already called */
         EVP_PKEY_free(skey);
         has_error = 1;
         goto oqs_cleanup;
+      }
     }
-
-    if (do_hybrid) {
+    if (do_pqc || do_hybrid) {
         /* make sure ctx and key were initialized in add_key_share */
         if (s->s3->tmp.oqs_kem == NULL || s->s3->tmp.oqs_kem_client == NULL) {
           /* this should never happen */

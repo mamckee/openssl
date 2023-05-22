@@ -241,9 +241,17 @@ const TLS_GROUP_INFO *tls1_group_id_lookup(uint16_t group_id)
 {
     size_t i;
     /* check if it is an OQS group */
+    if (IS_OQS_KEM_CURVEID(group_id)) {
+        int oqs_nid = OQS_KEM_NID(group_id);
+        for (i = 0; i < OSSL_NELEM(oqs_nid_list); i++) {
+            if (oqs_nid_list[i].nid == oqs_nid) {
+                return &oqs_nid_list[i];
+            }
+        }
+    }
     if (IS_OQS_KEM_HYBRID_CURVEID(group_id)) {
         int oqs_nid = OQS_HYBRID_KEM_NID(group_id);
-        for (i = 0; i < OSSL_NELEM(oqs_hybrid_nid_list); i++) {
+        for (i = 0; i < OSSL_NELEM(oqs_nid_list); i++) {
             if (oqs_hybrid_nid_list[i].nid == oqs_nid) {
                 return &oqs_hybrid_nid_list[i];
             }
@@ -257,6 +265,7 @@ const TLS_GROUP_INFO *tls1_group_id_lookup(uint16_t group_id)
 }
 
 # define MAX_CURVELIST   (OSSL_NELEM(nid_list) + \
+                          OSSL_NELEM(oqs_nid_list) + \
                           OSSL_NELEM(oqs_hybrid_nid_list))
 
 static uint16_t tls1_nid2group_id(int nid)
@@ -266,8 +275,12 @@ static uint16_t tls1_nid2group_id(int nid)
         if (nid_list[i].nid == nid)
             return (uint16_t)(i + 1);
     }
+    for (; i < OSSL_NELEM(nid_list)+OSSL_NELEM(oqs_nid_list); i++) {
+        if (oqs_nid_list[i-OSSL_NELEM(nid_list)].nid == nid)
+            return (uint16_t)(i + 1);
+    }
     for (; i < MAX_CURVELIST; i++) {
-        if (oqs_hybrid_nid_list[i-(OSSL_NELEM(nid_list))].nid == nid)
+        if (oqs_hybrid_nid_list[i-(OSSL_NELEM(nid_list)+OSSL_NELEM(oqs_nid_list))].nid == nid)
             return (uint16_t)(i + 1);
     }
     return 0;
