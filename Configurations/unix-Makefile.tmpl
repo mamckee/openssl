@@ -529,6 +529,9 @@ test: tests
 {- dependmagic('tests'); -}: build_programs_nodep build_modules_nodep link-utils run_tests
 run_tests:
 	@ : {- output_off() if $disabled{tests}; "" -}
+	( cd test; \
+	  cp $(libdir)/engines-3/symcryptengine.so ../$(BLDDIR)/engines/; \
+	cp $(libdir)/ossl-modules/symcryptprovider.so ../$(BLDDIR)/providers/;)
 	( SRCTOP=$(SRCDIR) \
 	  BLDTOP=$(BLDDIR) \
 	  PERL="$(PERL)" \

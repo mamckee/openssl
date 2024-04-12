@@ -518,7 +518,7 @@ my @smime_cms_param_tests = (
     [ "signed content test streaming PEM format, RSA keys, PSS signature, SHA384 MGF1",
       [ "{cmd1}", @prov, "-sign", "-in", $smcont, "-outform", "PEM", "-nodetach",
         "-signer", $smrsa1,
-        "-keyopt", "rsa_padding_mode:pss", "-keyopt", "rsa_mgf1_md:sha384",
+        "-keyopt", "rsa_padding_mode:pss", "-md", "sha384", "-keyopt", "rsa_mgf1_md:sha384",
         "-out", "{output}.cms" ],
       [ "{cmd2}", @prov, "-verify", "-in", "{output}.cms", "-inform", "PEM",
         "-CAfile", $smroot, "-out", "{output}.txt" ],

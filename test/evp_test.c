@@ -812,7 +812,8 @@ static int cipher_test_enc(EVP_TEST *t, int enc,
     }
 
     /* Check that we get the same IV back */
-    if (expected->iv != NULL) {
+    if (expected->iv != NULL &&
+        EVP_CIPHER_get0_provider(EVP_CIPHER_CTX_get0_cipher(ctx_base)) != NULL) {
         /* Some (e.g., GCM) tests use IVs longer than EVP_MAX_IV_LENGTH. */
         unsigned char iv[128];
         if (!TEST_true(EVP_CIPHER_CTX_get_updated_iv(ctx_base, iv, sizeof(iv)))

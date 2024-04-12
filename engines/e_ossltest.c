@@ -428,6 +428,10 @@ static int bind_ossltest(ENGINE *e)
         return 0;
     }
 
+    ENGINE* scossl = ENGINE_by_id("symcrypt");
+    ENGINE_unregister_pkey_meths(scossl);
+    ENGINE_free(scossl);
+
     return 1;
 }
 

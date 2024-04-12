@@ -277,6 +277,72 @@ DEFINE_RUN_ONCE_STATIC(ossl_init_async)
     return 1;
 }
 
+#define BUZZ_SIZE 4096
+#define PROC_CMDLINE "/proc/cmdline"
+#define FIPS_ENABLE_CONF "/etc/fips/fips_enable"
+#define FIPS_OPENSSL_CONFIG "/usr/lib/ssl/openssl-fips.cnf"
+int g_fips_mode_enabled = -1;
+// Check if the fips is enabled by command line
+int ossl_fips_enabled_by_cmd(){
+    int enabled = 0;
+    FILE * fp = NULL;
+    char buff[BUZZ_SIZE] = "";
+    if((fp = fopen(PROC_CMDLINE, "r")) != NULL){
+        fgets(buff, BUZZ_SIZE, fp);
+        char * token = strtok(buff, " \n");
+        while( token != NULL ) {
+            if (strcmp(token, "fips=1") == 0){
+                enabled = 1;
+                break;
+            }
+            if (strcmp(token, "sonic_fips=1") == 0){
+                enabled = 1;
+                break;
+            }
+            token = strtok(NULL, " \n");
+        }
+
+        fclose(fp);
+    }
+
+    return enabled;
+}
+
+// Check if fips is enabled by config
+int ossl_fips_enabled_by_conf(){
+    int enabled = 0;
+    FILE * fp = NULL;
+    char buff[BUZZ_SIZE] = "";
+    if((fp = fopen(FIPS_ENABLE_CONF, "r")) != NULL ){
+        fgets(buff, BUZZ_SIZE, fp);
+        if (strlen(buff) > 0 && buff[0] == '1') {
+            enabled = 1;
+        }
+
+        fclose(fp);
+    }
+
+    return enabled;
+}
+
+// Init fips config
+static CRYPTO_ONCE fips_config = CRYPTO_ONCE_STATIC_INIT;
+DEFINE_RUN_ONCE_STATIC(ossl_init_fips_conf)
+{
+    g_fips_mode_enabled = 0;
+    if (ossl_fips_enabled_by_cmd() > 0){
+        g_fips_mode_enabled = 1;
+        return 1;
+    }
+
+    if (ossl_fips_enabled_by_conf() > 0){
+        g_fips_mode_enabled = 1;
+        return 1;
+    }
+
+    return 1;
+}
+
 #ifndef OPENSSL_NO_ENGINE
 static CRYPTO_ONCE engine_openssl = CRYPTO_ONCE_STATIC_INIT;
 DEFINE_RUN_ONCE_STATIC(ossl_init_engine_openssl)
@@ -603,6 +669,9 @@ int OPENSSL_init_crypto(uint64_t opts, const OPENSSL_INIT_SETTINGS *settings)
 
     if ((opts & OPENSSL_INIT_ASYNC)
             && !RUN_ONCE(&async, ossl_init_async))
+        return 0;
+
+    if (!RUN_ONCE(&fips_config, ossl_init_fips_conf))
         return 0;
 
 #ifndef OPENSSL_NO_ENGINE
