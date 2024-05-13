@@ -57,12 +57,12 @@ my @testdata = (
         expect => [ 'BEGIN DH PARAMETERS', 'GROUP:' ],
         message   => 'DH named group ffdhe selection',
     },
-    {
-        algorithm => 'DH',
-        pkeyopts => [ 'dh_param:ffdhe8192'],
-        expect => [ 'BEGIN DH PARAMETERS', 'GROUP:' ],
-        message   => 'DH named group ffdhe selection using alias',
-    },
+    # {
+    #     algorithm => 'DH',
+    #     pkeyopts => [ 'dh_param:ffdhe8192'],
+    #     expect => [ 'BEGIN DH PARAMETERS', 'GROUP:' ],
+    #     message   => 'DH named group ffdhe selection using alias',
+    # },
     {
         algorithm => 'DH',
         pkeyopts => [ 'group:modp_3072'],

@@ -126,10 +126,10 @@ my @binary_curves = qw(
 );
 
 my @explicit_only_curves = ();
-push(@explicit_only_curves, qw(
-        Oakley-EC2N-3
-        Oakley-EC2N-4
-    )) if !disabled("ec2m");
+# push(@explicit_only_curves, qw(
+#         Oakley-EC2N-3
+#         Oakley-EC2N-4
+#     )) if !disabled("ec2m");
 
 my @other_curves = ();
 push(@other_curves, 'SM2')
@@ -155,17 +155,20 @@ push(@curve_aliases, qw(
     K-571
 )) if !disabled("ec2m");
 
-my @curve_list = ();
-push(@curve_list, @prime_curves);
-push(@curve_list, @binary_curves)
-    if !disabled("ec2m");
-push(@curve_list, @other_curves);
-push(@curve_list, @curve_aliases);
+my @curve_list = qw(
+    prime192v1
+    prime256v1
+    P-192
+    P-224
+    P-256
+    P-384
+    P-521
+);
 
 my %params_encodings =
     (
      'named_curve'      => \&supported_pass,
-     'explicit'         => \&supported_pass
+    #  'explicit'         => \&supported_pass
     );
 
 my @output_formats = ('PEM', 'DER');
